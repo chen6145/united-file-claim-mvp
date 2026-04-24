@@ -656,7 +656,155 @@ Storage / logs / recordings
 - `AI 自主完成 claim intake`
 - `只在验证或高风险节点 transfer`
 
-## 两种方案的 Tradeoff
+## 方案 C：Twilio + 自己的 server
+
+这个方案的核心思想是：
+
+- 不用 `Vapi`
+- 直接用 `Twilio` 做 telephony
+- 自己在 server 里实现 `STT -> text LLM -> TTS`
+- 自己负责 orchestration、logging、recording、transfer、DTMF
+
+### 架构图
+
+```text
+Twilio
+  |
+Media Streams / TwiML / Webhooks
+  |
+Your Orchestrator Server
+  |-- STT
+  |-- text LLM
+  |-- TTS
+  |-- call state machine
+  |-- transfer policy
+  |-- DTMF policy
+  |-- post-call evaluator
+  |
+Storage / logs / recordings
+```
+
+### 你要额外做什么
+
+相比 `Twilio + Vapi`，这条路多出来的工作不是一点点，而是整层 runtime。
+
+#### 1. 自己做实时音频桥
+
+你要自己处理：
+
+- Twilio Media Streams 接入
+- 音频 chunk 收发
+- STT 输入
+- TTS 输出回推
+- 中断 / 抢话 / turn-taking
+
+#### 2. 自己做 agent runtime
+
+Vapi 帮你做掉的很多东西，这里都要自己接：
+
+- 对话轮次管理
+- transcript 聚合
+- partial / final transcript 处理
+- tool 调用编排
+- prompt 注入
+- post-tool response 拼接
+
+#### 3. 自己做 telephony orchestration
+
+你要自己实现：
+
+- `DTMF`
+- `hold / wait`
+- `transfer`
+- `conference / bridge`
+- `call update`
+- `timeout / retry`
+- `hangup / recover`
+
+#### 4. 自己做录音和转写留存
+
+这里不是“可选加分项”，而是基础设施工作：
+
+- 保存 Twilio recording
+- 保存 transcript 事件
+- 保存 tool timeline
+- 保存 transfer timeline
+- 做最终结构化摘要
+
+#### 5. 自己做 observability
+
+至少要自己准备：
+
+- 实时日志
+- transcript viewer
+- tool call logs
+- 状态机日志
+- error tracing
+- 通话后复盘数据
+
+### 如果你想用“自己 Mac 上的 agent”
+
+这条路理论上可以，但会再多一层工程问题：
+
+- 你的 Mac 上必须跑一个可调用的 API server
+- 这个 server 必须被 Twilio / 你的 orchestrator 稳定访问
+- 如果是本机服务，通常还要做公网暴露
+- 睡眠、断网、进程挂掉都会直接影响电话
+
+所以：
+
+- demo 可以这么干
+- 正式测试不建议把 Mac 当生产后端
+
+### 方案 C 的优点
+
+- 控制权最高
+- 供应商锁定最低
+- 最容易把系统往“真正产品”演进
+- 可以精细控制 IVR、hold、transfer、tool UX
+- 长期成本结构可能更干净
+
+### 方案 C 的缺点
+
+- 开发量最大
+- 最容易死在 plumbing 上
+- 最难在 hackathon 时间里做稳
+- 录音、转写、日志、状态机都要自己兜
+- 调试成本高
+
+### 这条路到底有多难
+
+如果只给一个非常直接的判断：
+
+- `方案 A` 难度：`3/10`
+- `方案 B` 难度：`6/10`
+- `方案 C` 难度：`8.5/10`
+
+这个分数不是指“理论理解难度”，而是指“明天要做出一个稳定 demo 的难度”。
+
+### 为什么会难这么多
+
+因为你不是只多做一个“LLM 接口”，你实际上多做了：
+
+- voice runtime
+- telephony runtime
+- orchestration runtime
+- observability runtime
+
+也就是说，`Twilio + 自己 server` 不是“Vapi 的轻量替代”，而是“你自己成为 Vapi”。
+
+### 这条路什么时候值得走
+
+如果你满足下面任一条件，才值得认真走：
+
+- 你非常在意控制权
+- 你明确知道 Vapi 抽象会卡你
+- 你想长期做产品，不只是 hackathon
+- 你已经有现成的语音/编排后端积累
+
+如果只是为了明天跑通 demo，这条路通常不值。
+
+## 三种方案的 Tradeoff
 
 ### 方案 A 更像
 
@@ -669,6 +817,12 @@ Storage / logs / recordings
 - Telephony-first workflow
 - 稳定生产雏形
 - 明确的流程控制
+
+### 方案 C 更像
+
+- 自建 voice stack
+- 最大控制权
+- 最大工程成本
 
 ### 对这个具体 use case 的判断
 
@@ -684,6 +838,7 @@ Storage / logs / recordings
 
 - `方案 A` 更适合 hackathon demo
 - `方案 B` 更适合做真正能反复跑的系统
+- `方案 C` 只适合你明确要验证“自建 telephony agent stack”这件事本身
 
 ## 我建议的 MVP 路线
 
@@ -712,6 +867,16 @@ Storage / logs / recordings
 - `needs_user`
 
 这几个状态显式化。
+
+### 不建议的路线
+
+如果你的目标就是：
+
+- 明天要跑通
+- 重点是展示 use case
+- 不是展示自建 voice infra
+
+那不建议直接走 `方案 C`。
 
 ## MVP 接口设计
 
@@ -794,6 +959,7 @@ Storage / logs / recordings
 
 - 不要一上来做重状态机
 - 但也不要把所有编排全交给 prompt
+- 更不要一上来自己重做整套 `Twilio + own server` runtime
 
 最实际的 MVP 形态应该是：
 
