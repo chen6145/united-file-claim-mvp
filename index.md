@@ -137,6 +137,182 @@ MVP 明确要求：
 
 第一版不要跳过这个问题。
 
+## Twilio / Vapi 电话 Setup 流程
+
+这一节只写“明天要跑 demo，最短怎么配起来”。
+
+### Step 1：准备 Twilio 账号
+
+建议：
+
+- 直接用 `Twilio paid account`
+- 不要赌 `trial`
+
+原因：
+
+- trial 有被叫限制
+- trial 会插入提示音
+- trial 不适合真实外呼客服
+
+### Step 2：准备 Twilio 电话号码
+
+至少准备两类号码中的一种：
+
+1. `Twilio number`  
+   作为系统实际使用的电话入口
+
+2. 你的个人手机号做 `verified caller ID`  
+   如果你希望外呼时显示你自己的号码
+
+MVP 里最稳的做法是：
+
+- 系统底层用 `Twilio number`
+- 如有需要，对外显示你的个人手机号
+
+### Step 3：在 Vapi 创建基础 assistant
+
+先不要一开始就追求复杂多 agent。
+
+第一版建议：
+
+- 一个主 assistant
+- 一个统一 system prompt
+- 一个 tool backend
+- 一个 transfer policy
+
+assistant 至少要配置：
+
+- model
+- voice
+- transcriber
+- tools
+- server URL
+- fallback / handoff 规则
+
+### Step 4：把 Twilio 号码接进 Vapi
+
+有两种常见方式：
+
+1. 直接用 Vapi 分配/支持的号码  
+2. 导入你自己的 `Twilio number`
+
+对你这个项目，建议优先：
+
+- 用你自己控制的 `Twilio number`
+- 再导入 Vapi
+
+这样后面录音、回拨、日志、迁移都更可控。
+
+### Step 5：接好后端 server
+
+你的后端至少要提供：
+
+- tool endpoints
+- webhook 接收
+- post-call 处理
+- transcript / recording 保存
+
+第一版最少 endpoints：
+
+- `POST /calls/start`
+- `POST /tools/lookup_user_claim_context`
+- `POST /tools/append_claim_notes`
+- `POST /tools/transfer_to_user`
+- `POST /tools/save_claim_reference`
+- `POST /tools/save_next_step`
+- `POST /calls/postcall`
+
+### Step 6：先把 recording 和 transcript 存起来
+
+顺序上，这一步应该比“优化 prompt”更早。
+
+至少要确认：
+
+- Twilio recording 能落盘
+- Vapi transcript 事件能保存
+- call_id 能串起：
+  - Twilio call SID
+  - Vapi call id
+  - user id
+
+如果这一步没做，demo 一旦失败就很难复盘。
+
+### Step 7：配置 transfer 到你的手机
+
+先把 transfer 做成一个明确工具，而不是临时想起来再配。
+
+至少要准备：
+
+- 你的目标手机号
+- transfer 触发条件
+- transfer 前给用户的 summary
+- transfer 失败时的 fallback
+
+MVP 的最低要求是：
+
+- 只要出现本人验证或高风险确认，就可以稳定转到你手机
+
+### Step 8：先跑最小 happy path
+
+第一轮测试不要直接打 United。
+
+先测：
+
+1. 外呼能打通
+2. transcript 正常
+3. tool call 正常
+4. transfer 到你手机正常
+5. recording 正常保存
+
+只有这些都通了，再上真实客服电话。
+
+### Step 9：再测真实客服电话路径
+
+这里建议分三层验证：
+
+1. `IVR layer`
+   - 能不能稳定过菜单
+
+2. `waiting layer`
+   - 能不能正确识别真人接通
+
+3. `human layer`
+   - 能不能正确描述 claim 背景并拿到 next step
+
+不要第一次测试就把所有能力同时打开。
+
+### Step 10：最后才优化 prompt
+
+很多人会一开始狂改 prompt，但对电话 agent 来说，优先级通常应该是：
+
+1. telephony 通
+2. transcript / recording 通
+3. transfer 通
+4. tool call 通
+5. 最后才是 prompt 优化
+
+### 推荐的 setup 顺序
+
+如果你明天要跑 demo，我建议按这个顺序配：
+
+1. `Twilio paid account`
+2. 买 `Twilio number`
+3. Vapi 建 assistant
+4. 导入 / 绑定 Twilio 号码
+5. 配最小 tool backend
+6. 打通 recording + transcript
+7. 打通 transfer 到你手机
+8. 跑一通 mock 测试电话
+9. 再打真实 United 客服
+
+### 最容易踩的 setup 坑
+
+- 一开始就用 trial
+- 一开始就打真实客服电话
+- 还没存 recording / transcript 就开始调 prompt
+- transfer 号码没预先验证就临场测试
+- 没先把 `Twilio SID / Vapi call id / user id` 做统一映射
+
 ## 工具定义
 
 两种方案共用的 tool 集合建议如下：
