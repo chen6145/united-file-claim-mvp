@@ -252,6 +252,51 @@ MVP 的最低要求是：
 
 - 只要出现本人验证或高风险确认，就可以稳定转到你手机
 
+### Step 7B：如果你希望“你离开后再回到 AI”
+
+这不是普通 `transferCall`，而是 `conference / bridge` 问题。
+
+这里要先明确：
+
+- `AI -> 你，transfer 成功`  
+  默认通常意味着 AI 退出
+
+- `AI + 客服 + 你` 三方短暂同在线，之后你离开、AI 继续  
+  这需要 `Twilio conference orchestration`
+
+也就是说：
+
+- 纯 `Vapi transferCall` 适合“转给你然后你接手”
+- 如果你想“你插一下话，然后还回 AI”，通常要 `Twilio + own server`
+
+#### 这条高级路径要额外准备什么
+
+- 一个 `conference id`
+- 当前 call leg 的 `Twilio CallSid`
+- 第二条拨给你手机的 call leg
+- participant status callbacks
+- 你加入 / 你离开后的路由规则
+
+#### 最小流程
+
+1. AI 正在和客服通话
+2. 你的 server 把当前 call 更新到一个 conference
+3. 你的 server 再拨一条 call 给你手机，并加入同一 conference
+4. 你短暂介入
+5. 你离开 conference
+6. AI 和客服继续
+
+#### 工程判断
+
+如果只是明天 demo：
+
+- 不建议第一版就做这条路径
+
+如果你明确要验证“人类短暂介入后 AI 继续”的体验：
+
+- 这条路可做
+- 但它已经更接近 `方案 C` 的工作量，而不是简单的 `Twilio + Vapi setup`
+
 ### Step 8：先跑最小 happy path
 
 第一轮测试不要直接打 United。
