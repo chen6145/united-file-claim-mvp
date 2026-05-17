@@ -3,188 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Donato Enoteca | Peninsula Living</title>
+  <title>Donato Enoteca 点菜推荐</title>
   <style>
     :root {
-      --bg: #f4ede3;
-      --paper: rgba(255, 250, 243, 0.94);
-      --ink: #1f1815;
-      --muted: #6a5f56;
-      --wine: #873428;
-      --pine: #27453f;
-      --line: rgba(31, 24, 21, 0.1);
-      --shadow: 0 22px 56px rgba(58, 37, 23, 0.12);
+      --bg: #f4efe6;
+      --paper: #fffaf3;
+      --ink: #1f1a17;
+      --muted: #6d6259;
+      --accent: #8f2f23;
+      --accent-2: #d9b16f;
+      --line: #e6d9cb;
+      --card: #fffdf9;
+      --shadow: 0 18px 50px rgba(64, 38, 19, 0.12);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top right, rgba(135, 52, 40, 0.12), transparent 24%),
-        radial-gradient(circle at left center, rgba(39, 69, 63, 0.08), transparent 24%),
-        linear-gradient(180deg, #f8f1e6 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, rgba(217, 177, 111, 0.25), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+      line-height: 1.55;
     }
-    a { color: inherit; text-decoration: none; }
     .wrap {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1160px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 20px 0 56px;
+      padding: 22px 0 56px;
     }
-    .bar, .hero, .panel {
-      border: 1px solid rgba(255,255,255,0.72);
-      background: var(--paper);
+    .site-bar,
+    .site-footer {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
     }
-    .bar {
+    .site-bar {
       border-radius: 22px;
-      padding: 15px 18px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 14px;
       margin-bottom: 18px;
     }
-    .brand {
+    .site-brand {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    .brand small, .eyebrow {
+    .site-brand span {
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--wine);
-      font-weight: 700;
+      color: var(--accent);
     }
-    .brand strong, h1, h2, h3 {
+    .site-brand strong {
+      font-size: 23px;
       font-family: "Baskerville", "Iowan Old Style", serif;
-      font-weight: 700;
     }
-    .brand strong { font-size: 24px; }
-    .nav {
+    .site-nav {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .nav a, .hero-links a {
-      border: 1px solid var(--line);
+    .site-nav a {
+      border: 1px solid rgba(143, 47, 35, 0.12);
       border-radius: 999px;
       padding: 10px 13px;
       font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.65);
+      background: rgba(255, 255, 255, 0.66);
+      text-decoration: none;
     }
     .hero {
-      border-radius: 32px;
-      overflow: hidden;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      margin-bottom: 18px;
+      grid-template-columns: 1.2fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .hero-copy,
+    .hero-photo,
+    .panel,
+    .dish-card {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
+      box-shadow: var(--shadow);
     }
     .hero-copy {
-      padding: 30px;
-      background: linear-gradient(160deg, rgba(255,251,246,0.98) 0%, rgba(245,235,223,0.92) 100%);
+      padding: 28px;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .hero-side {
-      padding: 30px;
-      background:
-        radial-gradient(circle at top right, rgba(201,165,109,0.28), transparent 26%),
-        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
-      color: #f7f1e7;
+    .hero-photo {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 320px;
+      position: relative;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-photo .review-trend {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(25, 20, 17, 0.68);
+      color: #fffaf3;
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.08;
     }
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(38px, 6vw, 64px);
-      line-height: 0.94;
-      letter-spacing: -0.03em;
+      font-size: clamp(34px, 5.5vw, 58px);
+      margin-bottom: 12px;
     }
     h2 {
-      margin: 0 0 12px;
-      font-size: 32px;
-      line-height: 1.02;
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 12px;
     }
-    p {
-      margin: 0;
-      line-height: 1.7;
+    h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
+    p { margin: 0; }
     .lede {
-      max-width: 42ch;
       font-size: 18px;
-      color: #382f2a;
-    }
-    .hero-side p {
-      color: rgba(247,241,231,0.82);
+      color: #332a25;
+      max-width: 44ch;
     }
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
       margin-top: 18px;
     }
     .chip {
-      padding: 8px 11px;
+      border: 1px solid rgba(143, 47, 35, 0.14);
       border-radius: 999px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.68);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.62);
     }
-    .hero-links {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
-    .hero-links a.primary {
-      background: var(--wine);
+    .hero-actions a {
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid rgba(143, 47, 35, 0.14);
+      background: rgba(255,255,255,0.66);
+      color: var(--muted);
+    }
+    .hero-actions a.primary {
+      background: var(--accent);
+      color: #fffaf3;
       border-color: transparent;
-      color: #fbf5ea;
     }
-    .grid {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 20px;
+      margin-bottom: 24px;
     }
     .panel {
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 24px;
-      background: linear-gradient(180deg, rgba(255,252,248,0.94), rgba(249,242,233,0.92));
     }
-    ul {
-      margin: 0;
+    .panel ul,
+    .dish-card ul {
+      margin: 10px 0 0;
       padding-left: 18px;
-      color: #352d28;
-      line-height: 1.7;
     }
-    li + li {
-      margin-top: 8px;
+    .panel li,
+    .dish-card li {
+      margin: 8px 0;
     }
-    .source-list a {
-      text-decoration: underline;
-      color: var(--pine);
+    .section-title {
+      margin: 4px 0 14px;
     }
-    .note {
-      margin-top: 14px;
+    .menu-plan {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .plan-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(252,247,240,0.95) 100%);
+      border: 1px solid var(--line);
+    }
+    .plan-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-card p {
+      margin-top: 5px;
+    }
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .dish-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .dish-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .dish-body {
+      padding: 20px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .price {
+      color: var(--accent);
+      font-size: 18px;
+      white-space: nowrap;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .label {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      display: block;
+    }
+    .footer {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
       color: var(--muted);
       font-size: 14px;
     }
+    a { color: inherit; }
     @media (max-width: 900px) {
-      .hero, .grid {
-        grid-template-columns: 1fr;
-      }
+      .hero, .grid-2, .dish-grid, .menu-plan { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 260px; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="bar">
-      <div class="brand">
-        <small>Peninsula Living</small>
-        <strong>Restaurant Dossier</strong>
+    <section class="site-bar">
+      <div class="site-brand">
+        <span>Peninsula Living</span>
+        <strong>Restaurants</strong>
       </div>
-      <nav class="nav">
+      <nav class="site-nav">
         <a href="peninsula_living.html">Home</a>
         <a href="peninsula_restaurants.html">Restaurants</a>
         <a href="peninsula_hiking_trails.html">Hiking Trails</a>
@@ -194,69 +309,147 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">Peninsula Restaurant Model</span>
-        <h1>Donato Enoteca</h1>
-        <p class="lede">更像成熟稳妥的 downtown 意餐，不走极简本土派，但从官网菜单和 OpenTable 信号看，约会与多人聚餐都很稳。</p>
-        <div class="chips">
-          <span class="chip">现代意大利菜</span>
-          <span class="chip">Redwood City</span>
-          <span class="chip">4.4/5（OpenTable，2826条）</span>
-          <span class="chip">$31-$50</span>
-        </div>
-        <div class="hero-links">
-          <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Donato%20Enoteca%2C%201041%20Middlefield%20Rd%2C%20Redwood%20City%2C%20CA%2094063" target="_blank" rel="noopener noreferrer">Open Maps</a>
-          <a href="peninsula_restaurants.html">Back to Restaurants</a>
+        <div>
+          <span class="eyebrow">Peninsula Living / Restaurant Guide</span>
+          <h1>Donato Enoteca<br>点菜推荐</h1>
+          <p class="lede">Donato 现在最有意思的地方，不是它像一家万能意餐，而是它开始更明确地往“区域意大利 + chef-driven comfort”靠。菜单里从 Bigoli e Coda、Culurgiones 到 paccheri、padellino pizza 都比普通 downtown red-sauce Italian 更有辨识度；但如果你想要的是极简、克制、近乎学院派的意大利本土感，它仍然不是半岛最锋利的那类。</p>
+          <div class="chips"><span class="chip">regional pasta</span><span class="chip">downtown date night</span><span class="chip">pizza + seafood</span><span class="chip">mature crowd-pleaser</span></div>
+          <div class="hero-actions">
+            <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Donato%20Enoteca%2C%201041%20Middlefield%20Rd%2C%20Redwood%20City%2C%20CA%2094063" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            <a href="peninsula_restaurants.html">Back to Restaurants</a>
+          </div>
         </div>
       </div>
-      <div class="hero-side">
-        <span class="eyebrow">Source Note</span>
-        <h2>这家店更像什么</h2>
-        <p>菜名与点单方向主要基于官网 dinner PDF；评分取自 OpenTable；“稳妥/适合约会”含评论与订位信号推断，不是实吃结论。</p>
+      <div class="hero-photo">
+        <img src="https://images.squarespace-cdn.com/content/v1/530a3a4ae4b096bf489f33e7/1757545670806-G56QWZ1DPJ7X7Z974NB4/Nadia_Andreini_250904_077.jpg" alt="Donato Enoteca">
+        <div class="review-trend">
+          <span class="eyebrow" style="color:#f1c37d; margin-bottom:6px;">Recent Review Trend</span>
+          <div>截至 2026年5月上旬，OpenTable 仍给它 4.4/5 且样本量很大，说明它不是靠少量新鲜好评撑起来的短期热度。Tripadvisor 最近抓取页里还能看到 2026年2月的双人用餐正面反馈，整体公开信号更像“稳定、成熟、适合正式一点的 downtown 晚饭”，而不是近半年突然失速的老店。这个“稳定但不狂热”的判断，属于基于预订平台和公开点评分布的推断。</div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid-2">
       <article class="panel">
-        <span class="eyebrow">Best For</span>
-        <h2>适合什么局</h2>
-        <ul><li>正式但不压迫的约会</li>
-<li>想吃海鲜+意面+披萨混搭</li>
-<li>市中心散步接晚饭</li></ul>
-        <div class="note">
-          <span class="eyebrow">Skip If</span>
-          <ul><li>想吃特别先锋的新意餐</li>
-<li>严格控碳不想碰面/披萨</li>
-<li>只想要最安静的 fine dining</li></ul>
+        <h2 class="section-title">这家店怎么点才对</h2>
+        <ul><li>先从冷/温前菜里拿一个最能看手法的，不要一上来就全压在披萨；`Polpo e Pantesca` 或 `Carpaccio al Tartufo` 都比最保守的 salumi 更能看路数。</li>
+<li>碳水只点两样最合理：一份真正想吃的 pasta，再加一张最有 personality 的 pizza；把它点成“前菜 + 两面 + 两披萨”很容易失衡。</li>
+<li>如果两个人来，最佳结构通常是 `1前菜 + 1 pasta + 1 fish/meat + 1 pizza share`，比双 pasta 或双主菜更能吃出这家的跨度。</li>
+<li>海鲜线比想象中重要，`Spaghetti Neri`、`Paccheri alla Luciana`、`Branzino alla Brace` 都是比纯红酱更值得优先看的方向。</li>
+<li>这里有 `Chef&#x27;s Tasting Menu` 信号，但若你是第一次来，先按常规菜单建立判断通常更有效；tasting 值不值得，更多是场景和预算问题。</li></ul>
+      </article>
+      <article class="panel">
+        <h2 class="section-title">我给你的总判断</h2>
+        <ul><li>它更像一间成熟的 Redwood City downtown special-occasion Italian，而不是只靠披萨出圈的轻量馆子。</li>
+<li>最强区间是区域意面、海鲜和几张有明确风格的披萨并置时的完整性。</li>
+<li>真正的风险不是做得差，而是你如果按最保守点法去点，会把它吃成一间“不错但没记忆点”的普通意餐。</li>
+<li>对不喜欢 lasagna 式厚重 comfort 的人来说，它比典型 Italian-American 店更有可玩性。</li>
+<li>如果你想要更安静、更锋利、更少 crowd-pleaser 取向的意餐体验，它仍然不是半岛顶尖的极致答案。</li></ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-bottom:24px;">
+      <h2 class="section-title">标准单</h2>
+      <div class="menu-plan"><div class="plan-card">
+          <strong>Start</strong>
+          <p>Polpo e Pantesca</p><p>Insalata Siciliana</p>
         </div>
-      </article>
-
-      <article class="panel">
-        <span class="eyebrow">Ordering Bias</span>
-        <h2>怎么点更合理</h2>
-        <ul><li>先点章鱼、crudo 或 house-made salumi，不要一上来全压面食</li>
-<li>主菜优先海鲈或 short ribs；面只补一份 share 更合理</li>
-<li>披萨优先 in padellino 或配料更鲜明的款，不必只点最保守红酱系</li></ul>
-        <div class="note">
-          <span class="eyebrow">Cautions</span>
-          <ul><li>菜单近年有重做，网上旧菜单和新菜单并存，订前最好再看官网当日版</li>
-<li>高峰时段服务节奏可能拉长，这点主要来自 OpenTable 评论信号</li></ul>
+<div class="plan-card">
+          <strong>Pasta</strong>
+          <p>Bigoli e Coda</p><p>Culurgiones</p>
         </div>
-      </article>
+<div class="plan-card">
+          <strong>Pizza</strong>
+          <p>Pizza in Padellino Prosciutto e Burrata</p><p>Pizza Calabrese</p>
+        </div>
+<div class="plan-card">
+          <strong>Main</strong>
+          <p>Branzino alla Brace</p><p>Sottocoste di Fassona</p>
+        </div></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Sources</span>
-        <h2>参考链接</h2>
-        <ul class="source-list"><li><a href="https://www.donatoenoteca.com/new-menu" target="_blank" rel="noopener noreferrer">www.donatoenoteca.com/new-menu</a></li>
-<li><a href="https://www.opentable.com/r/donato-enoteca-redwood-city" target="_blank" rel="noopener noreferrer">www.opentable.com/r/donato-enoteca-redwood-city</a></li>
-<li><a href="https://static1.squarespace.com/static/530a3a4ae4b096bf489f33e7/t/69a5fa5b53f84801aaad1007/1772485211345/DE_Dinner_Menu_022826+.pdf" target="_blank" rel="noopener noreferrer">static1.squarespace.com/static/530a3a4ae4b096bf489f33e7/t/69a5fa5b53f84801aaad1007/1772485211345/DE_Dinner_Menu_022826+.pdf</a></li></ul>
-      </article>
+    <section>
+      <h2 style="margin: 0 0 16px;">推荐菜细讲</h2>
+      <div class="dish-grid"><article class="dish-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/530a3a4ae4b096bf489f33e7/1757545670806-G56QWZ1DPJ7X7Z974NB4/Nadia_Andreini_250904_077.jpg" alt="Polpo e Pantesca">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Polpo e Pantesca</h3>
+              <span class="price">$17</span>
+            </div>
+            <p class="tagline">如果你想先看它是不是只会做重口意面，这道章鱼就是最快的试金石。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>grilled octopus</li>
+<li>土豆、刺山柑、红洋葱、橄榄</li>
+<li>樱桃番茄和 fresh oregano</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>适合作为第一道 warm starter，能立刻看出火候和酸咸平衡。</li>
+<li>如果后面还要点海鲜 pasta，这道比再来一份贝类更不重复。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/530a3a4ae4b096bf489f33e7/1755412662495-AK1AEF4AK53WKGK3EL3T/Nadia_Andreini_250807_062.jpg" alt="Bigoli e Coda">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Bigoli e Coda</h3>
+              <span class="price">$28</span>
+            </div>
+            <p class="tagline">这道最能说明它不是只会做安全牌的 bolognese house。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>handmade bigoli</li>
+<li>Nebbiolo braised oxtail</li>
+<li>asparagus</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果桌上只点一份肉感 pasta，我会优先它而不是更常规的 Tagliolini al Ragu。</li>
+<li>适合 share；单人独吞再加披萨，整体会偏重。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/530a3a4ae4b096bf489f33e7/1755412652354-COVKO29JEM6S6E66HKEJ/Nadia_Andreini_250807_035.jpg" alt="Branzino alla Brace">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Branzino alla Brace</h3>
+              <span class="price">$32</span>
+            </div>
+            <p class="tagline">想把这顿饭从“意面店”拉成更完整的晚餐结构，这道鱼是关键。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>grilled Mediterranean sea bass filet</li>
+<li>pappa al pomodoro</li>
+<li>broccoli rabe、Gaeta olive、white wine sauce</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>两人局里，它比再加一份短肋或 lamb skewers 更能拉开层次。</li>
+<li>如果前面已经点了 squid ink 或 paccheri，这里选鱼通常比再堆肉更聪明。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.squarespace-cdn.com/content/v1/530a3a4ae4b096bf489f33e7/1755412674057-7MW5YXMNV39AXNNUE0IH/Nadia_Andreini_250807_075.jpg" alt="Pizza in Padellino Prosciutto e Burrata">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Pizza in Padellino Prosciutto e Burrata</h3>
+              <span class="price">$19</span>
+            </div>
+            <p class="tagline">不是最经典的一张，但最能体现它把 pizza 当独立武器而不是配角。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>pan-cooked pizza</li>
+<li>prosciutto di Parma</li>
+<li>imported burrata</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果只点一张 pizza，我会优先这类更有 texture contrast 的 padellino 线。</li>
+<li>和 Bigoli e Coda 同点很强，但那就别再加第二份重奶酪前菜了。</li></ul>
+          </div>
+        </article></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Editorial Read</span>
-        <h2>简短结论</h2>
-        <p>更像成熟稳妥的 downtown 意餐，不走极简本土派，但从官网菜单和 OpenTable 信号看，约会与多人聚餐都很稳。</p>
-        <p class="note">这里的 `best for / skip if / order bias` 是基于菜单、店型、公开 listing 与评价信号整理后的编辑判断，不等同于店方原始表述。</p>
-      </article>
+    <section class="footer">
+      <p><strong>来源说明：</strong>菜单与价格来自 Donato 当前 dinner PDF（文件名含 2026-02-28），评分取 OpenTable 当前公开页。recent_review_trend、点单结构、以及“更像区域意大利而非普通 downtown Italian”的判断，属于基于菜单结构和公开评论信号的推断；图片为官方站点公开摄影，不保证与具体菜品一一对应。</p>
+      <p style="margin-top:8px;"><strong>参考链接：</strong> <a href="https://www.donatoenoteca.com/new-menu" target="_blank" rel="noopener noreferrer">www.donatoenoteca.com/new-menu</a> · <a href="https://static1.squarespace.com/static/530a3a4ae4b096bf489f33e7/t/69a5fa5b53f84801aaad1007/1772485211345/DE_Dinner_Menu_022826+.pdf" target="_blank" rel="noopener noreferrer">static1.squarespace.com/static/530a3a4ae4b096bf489f33e7/t/69a5fa5b53f84801aaad1007/1772485211345/DE_Dinner_Menu_022826+.pdf</a> · <a href="https://www.opentable.com/r/donato-enoteca-redwood-city" target="_blank" rel="noopener noreferrer">www.opentable.com/r/donato-enoteca-redwood-city</a> · <a href="https://www.tripadvisor.com/Restaurant_Review-g32966-d3482416-Reviews-Donato_Enoteca-Redwood_City_California.html" target="_blank" rel="noopener noreferrer">www.tripadvisor.com/Restaurant_Review-g32966-d3482416-Reviews-Donato_Enoteca-Redwood_City_California.html</a></p>
+    </section>
+
+    <section class="site-footer" style="margin-top:18px; border-radius:22px; padding:18px 20px;">
+      <div style="font-family:'Baskerville','Iowan Old Style',serif; font-size:24px; margin-bottom:6px;">Peninsula Living</div>
+      <p style="color:var(--muted); font-size:14px; line-height:1.6;">
+        This page now lives inside the Restaurants section. Return to the index if you want the broader Peninsula Living structure rather than a single dinner dossier.
+      </p>
     </section>
   </main>
 </body>

@@ -3,188 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amara | Peninsula Living</title>
+  <title>Amara 点菜推荐</title>
   <style>
     :root {
-      --bg: #f4ede3;
-      --paper: rgba(255, 250, 243, 0.94);
-      --ink: #1f1815;
-      --muted: #6a5f56;
-      --wine: #873428;
-      --pine: #27453f;
-      --line: rgba(31, 24, 21, 0.1);
-      --shadow: 0 22px 56px rgba(58, 37, 23, 0.12);
+      --bg: #f4efe6;
+      --paper: #fffaf3;
+      --ink: #1f1a17;
+      --muted: #6d6259;
+      --accent: #8f2f23;
+      --accent-2: #d9b16f;
+      --line: #e6d9cb;
+      --card: #fffdf9;
+      --shadow: 0 18px 50px rgba(64, 38, 19, 0.12);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top right, rgba(135, 52, 40, 0.12), transparent 24%),
-        radial-gradient(circle at left center, rgba(39, 69, 63, 0.08), transparent 24%),
-        linear-gradient(180deg, #f8f1e6 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, rgba(217, 177, 111, 0.25), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+      line-height: 1.55;
     }
-    a { color: inherit; text-decoration: none; }
     .wrap {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1160px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 20px 0 56px;
+      padding: 22px 0 56px;
     }
-    .bar, .hero, .panel {
-      border: 1px solid rgba(255,255,255,0.72);
-      background: var(--paper);
+    .site-bar,
+    .site-footer {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
     }
-    .bar {
+    .site-bar {
       border-radius: 22px;
-      padding: 15px 18px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 14px;
       margin-bottom: 18px;
     }
-    .brand {
+    .site-brand {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    .brand small, .eyebrow {
+    .site-brand span {
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--wine);
-      font-weight: 700;
+      color: var(--accent);
     }
-    .brand strong, h1, h2, h3 {
+    .site-brand strong {
+      font-size: 23px;
       font-family: "Baskerville", "Iowan Old Style", serif;
-      font-weight: 700;
     }
-    .brand strong { font-size: 24px; }
-    .nav {
+    .site-nav {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .nav a, .hero-links a {
-      border: 1px solid var(--line);
+    .site-nav a {
+      border: 1px solid rgba(143, 47, 35, 0.12);
       border-radius: 999px;
       padding: 10px 13px;
       font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.65);
+      background: rgba(255, 255, 255, 0.66);
+      text-decoration: none;
     }
     .hero {
-      border-radius: 32px;
-      overflow: hidden;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      margin-bottom: 18px;
+      grid-template-columns: 1.2fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .hero-copy,
+    .hero-photo,
+    .panel,
+    .dish-card {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
+      box-shadow: var(--shadow);
     }
     .hero-copy {
-      padding: 30px;
-      background: linear-gradient(160deg, rgba(255,251,246,0.98) 0%, rgba(245,235,223,0.92) 100%);
+      padding: 28px;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .hero-side {
-      padding: 30px;
-      background:
-        radial-gradient(circle at top right, rgba(201,165,109,0.28), transparent 26%),
-        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
-      color: #f7f1e7;
+    .hero-photo {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 320px;
+      position: relative;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-photo .review-trend {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(25, 20, 17, 0.68);
+      color: #fffaf3;
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.08;
     }
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(38px, 6vw, 64px);
-      line-height: 0.94;
-      letter-spacing: -0.03em;
+      font-size: clamp(34px, 5.5vw, 58px);
+      margin-bottom: 12px;
     }
     h2 {
-      margin: 0 0 12px;
-      font-size: 32px;
-      line-height: 1.02;
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 12px;
     }
-    p {
-      margin: 0;
-      line-height: 1.7;
+    h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
+    p { margin: 0; }
     .lede {
-      max-width: 42ch;
       font-size: 18px;
-      color: #382f2a;
-    }
-    .hero-side p {
-      color: rgba(247,241,231,0.82);
+      color: #332a25;
+      max-width: 44ch;
     }
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
       margin-top: 18px;
     }
     .chip {
-      padding: 8px 11px;
+      border: 1px solid rgba(143, 47, 35, 0.14);
       border-radius: 999px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.68);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.62);
     }
-    .hero-links {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
-    .hero-links a.primary {
-      background: var(--wine);
+    .hero-actions a {
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid rgba(143, 47, 35, 0.14);
+      background: rgba(255,255,255,0.66);
+      color: var(--muted);
+    }
+    .hero-actions a.primary {
+      background: var(--accent);
+      color: #fffaf3;
       border-color: transparent;
-      color: #fbf5ea;
     }
-    .grid {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 20px;
+      margin-bottom: 24px;
     }
     .panel {
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 24px;
-      background: linear-gradient(180deg, rgba(255,252,248,0.94), rgba(249,242,233,0.92));
     }
-    ul {
-      margin: 0;
+    .panel ul,
+    .dish-card ul {
+      margin: 10px 0 0;
       padding-left: 18px;
-      color: #352d28;
-      line-height: 1.7;
     }
-    li + li {
-      margin-top: 8px;
+    .panel li,
+    .dish-card li {
+      margin: 8px 0;
     }
-    .source-list a {
-      text-decoration: underline;
-      color: var(--pine);
+    .section-title {
+      margin: 4px 0 14px;
     }
-    .note {
-      margin-top: 14px;
+    .menu-plan {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .plan-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(252,247,240,0.95) 100%);
+      border: 1px solid var(--line);
+    }
+    .plan-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-card p {
+      margin-top: 5px;
+    }
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .dish-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .dish-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .dish-body {
+      padding: 20px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .price {
+      color: var(--accent);
+      font-size: 18px;
+      white-space: nowrap;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .label {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      display: block;
+    }
+    .footer {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
       color: var(--muted);
       font-size: 14px;
     }
+    a { color: inherit; }
     @media (max-width: 900px) {
-      .hero, .grid {
-        grid-template-columns: 1fr;
-      }
+      .hero, .grid-2, .dish-grid, .menu-plan { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 260px; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="bar">
-      <div class="brand">
-        <small>Peninsula Living</small>
-        <strong>Restaurant Dossier</strong>
+    <section class="site-bar">
+      <div class="site-brand">
+        <span>Peninsula Living</span>
+        <strong>Restaurants</strong>
       </div>
-      <nav class="nav">
+      <nav class="site-nav">
         <a href="peninsula_living.html">Home</a>
         <a href="peninsula_restaurants.html">Restaurants</a>
         <a href="peninsula_hiking_trails.html">Hiking Trails</a>
@@ -194,69 +309,147 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">Peninsula Restaurant Model</span>
-        <h1>Amara</h1>
-        <p class="lede">场景最强的一家，像半岛版花园式地中海会所；适合庆祝、约会、以及愿意为氛围买单的晚饭。</p>
-        <div class="chips">
-          <span class="chip">地中海 / 跨东地中海</span>
-          <span class="chip">Belmont</span>
-          <span class="chip">OpenTable 4.5/5（22条）；Google 4.5/5（第三方转引，73条）</span>
-          <span class="chip">$$$</span>
-        </div>
-        <div class="hero-links">
-          <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Amara%20Belmont%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
-          <a href="peninsula_restaurants.html">Back to Restaurants</a>
+        <div>
+          <span class="eyebrow">Peninsula Living / Restaurant Guide</span>
+          <h1>Amara<br>点菜推荐</h1>
+          <p class="lede">Amara 更像一间把地中海语汇、花园空间和庆祝感做成整晚体验的 Belmont scene restaurant，而不是单一国家菜系的纯正考据馆。最对路的吃法是 mezze 先铺开，再上一道像 whole branzino 这样的桌面中心菜，最后把甜点预算留出来。</p>
+          <div class="chips"><span class="chip">garden scene</span><span class="chip">mezze-first</span><span class="chip">celebration bias</span><span class="chip">dessert matters</span></div>
+          <div class="hero-actions">
+            <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Amara%20Belmont%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            <a href="peninsula_restaurants.html">Back to Restaurants</a>
+          </div>
         </div>
       </div>
-      <div class="hero-side">
-        <span class="eyebrow">Source Note</span>
-        <h2>这家店更像什么</h2>
-        <p>评分来自 OpenTable 与第三方转引的 Google 数据。官网当前公开的是 sample menus，order_bias 因此带有明显菜单推断成分。</p>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Amara">
+        <div class="review-trend">
+          <span class="eyebrow" style="color:#f1c37d; margin-bottom:6px;">Recent Review Trend</span>
+          <div>Amara 的官方菜单页当前可抓，Restaurantji 页面发布于上个月，OpenTable 公共页在上周仍被抓取，近端公开信号明显集中在“漂亮、适合庆祝、mezze 和 dessert 记忆点强”。可见的风险也很清楚：它是 scene-driven 的餐厅，价格、房间能量和期待值会一起抬高，所以若你只是想找一顿安静、朴素的地中海晚饭，最近的公开评价并不支持把它当低调小馆来用。</div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid-2">
       <article class="panel">
-        <span class="eyebrow">Best For</span>
-        <h2>适合什么局</h2>
-        <ul><li>氛围型约会</li>
-<li>庆祝晚餐</li>
-<li>长时间慢吃</li></ul>
-        <div class="note">
-          <span class="eyebrow">Skip If</span>
-          <ul><li>只追求性价比</li>
-<li>想吃单一国家正统菜</li>
-<li>不想被场景带节奏</li></ul>
+        <h2 class="section-title">这家店怎么点才对</h2>
+        <ul><li>先按 mezze + share plates + 1 个 large plate 的逻辑想，不要每人各点一份主菜。</li>
+<li>Green Hummus、Baba Ghanoush 这类 house-made dip 是最安全的起手位。</li>
+<li>想看这家是不是只会做氛围，Braised Octopus 和 Grilled Whole Branzino 是最好的测试题。</li>
+<li>如果你已经点了 large plate，就别再把 share plates 点得太多太油，不然很快会失去节奏。</li>
+<li>能留出胃口的话，甜点应该被认真对待；品牌自己就在反复强调那块 opera cake。</li></ul>
+      </article>
+      <article class="panel">
+        <h2 class="section-title">我给你的总判断</h2>
+        <ul><li>这家店的价值不只在食物，也在空间、节奏和‘今晚像在度假’的情绪组织。</li>
+<li>如果你为氛围买单，它大概率能回本；如果你只按菜价比纯食物，它就没那么划算。</li>
+<li>公开评论和品牌文案都在把它往 celebration / garden dining / lingering dinner 的方向推，这不是巧合。</li>
+<li>它不是讲究单一国家纯度的店，而是更广义 Mediterranean lifestyle 的编排。</li>
+<li>综合判断：适合纪念日、花园约会和需要一点戏剧性的晚饭，不太适合随手填肚子。</li></ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-bottom:24px;">
+      <h2 class="section-title">标准单</h2>
+      <div class="menu-plan"><div class="plan-card">
+          <strong>Mezzes</strong>
+          <p>GREEN HUMMUS</p><p>BABA GHANOUSH</p><p>MIRZA GHASEMI</p><p>MUHAMMARA</p>
         </div>
-      </article>
-
-      <article class="panel">
-        <span class="eyebrow">Ordering Bias</span>
-        <h2>怎么点更合理</h2>
-        <ul><li>菜单最合理的读法是 mezze + 1 个海鲜/烤肉大盘共享，而不是每人各点一份主菜。</li>
-<li>官网和样例菜单都在强调 house-made pita、green hummus、baba ghanoush、muhammara、whole branzino、half chicken、opera cake。</li>
-<li>若你来这里，最好把一部分预算留给甜点或 drinks；这家明显在完整夜晚体验上做文章。</li></ul>
-        <div class="note">
-          <span class="eyebrow">Cautions</span>
-          <ul><li>价格和场景感一起抬高门槛，不是随便吃一顿的那类店。</li>
-<li>菜系跨 Greece / Morocco / Spain / Turkey 等多地，别按单一国家“绝对正统”去期待。</li></ul>
+<div class="plan-card">
+          <strong>Share Plates</strong>
+          <p>SALMON CRUDO</p><p>BRAISED OCTOPUS</p><p>GRILLED OYSTER MUSHROOM KABOB</p>
         </div>
-      </article>
+<div class="plan-card">
+          <strong>Large Plates</strong>
+          <p>GRILLED WHOLE BRANZINO</p><p>HALF CHICKEN</p><p>HALF RACK ROASTED LAMB</p>
+        </div>
+<div class="plan-card">
+          <strong>Dessert</strong>
+          <p>Praline-Pistachio Opera Cake</p>
+        </div></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Sources</span>
-        <h2>参考链接</h2>
-        <ul class="source-list"><li><a href="https://www.amararestaurants.com/" target="_blank" rel="noopener noreferrer">www.amararestaurants.com/</a></li>
-<li><a href="https://www.amararestaurants.com/menus/" target="_blank" rel="noopener noreferrer">www.amararestaurants.com/menus/</a></li>
-<li><a href="https://www.opentable.com/r/amara-san-francisco" target="_blank" rel="noopener noreferrer">www.opentable.com/r/amara-san-francisco</a></li></ul>
-      </article>
+    <section>
+      <h2 style="margin: 0 0 16px;">推荐菜细讲</h2>
+      <div class="dish-grid"><article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="GREEN HUMMUS">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>GREEN HUMMUS</h3>
+              <span class="price">$15</span>
+            </div>
+            <p class="tagline">这道不是 filler，而是最能判断这家 house-made mezze 线有没有认真做的起手位。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>green garbanzo</li>
+<li>whipped lemon crème fraîche</li>
+<li>pistachios and herbs with house-baked pita</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果这道做得平，后面整条 mezze 线的期待也要往下调。</li>
+<li>和 Baba Ghanoush 二选一时，第一次更建议先点这道。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="BRAISED OCTOPUS">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>BRAISED OCTOPUS</h3>
+              <span class="price">$21</span>
+            </div>
+            <p class="tagline">公开评论反复点名的一道菜，也是最适合测试厨房有没有真本事的 share plate。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>octopus</li>
+<li>papas bravas</li>
+<li>potato crisps</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果你只想点一个“像样的热前菜”，这道比随便选 kebab 更有信息量。</li>
+<li>后面如果还要 whole branzino，这道已经足够承担海鲜存在感。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="GRILLED WHOLE BRANZINO">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>GRILLED WHOLE BRANZINO</h3>
+              <span class="price">$44</span>
+            </div>
+            <p class="tagline">最像整桌中心菜的一道，也是把 Amara 从小盘局拉成一顿正式晚饭的关键。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>whole branzino</li>
+<li>roasted lemon chermoula</li>
+<li>summer squash and herbed basmati rice</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>两到三个人点这道最合理；再叠太多大盘会过头。</li>
+<li>如果你想让这顿饭更像 destination dinner，这道优先级很高。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="HALF CHICKEN">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>HALF CHICKEN</h3>
+              <span class="price">$36</span>
+            </div>
+            <p class="tagline">不是最 flashy，但通常是多人局里最稳的 protein plate。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>Moroccan-spiced chicken</li>
+<li>harissa yogurt</li>
+<li>olive oil mashed potatoes with pickles</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果同桌有人不爱整鱼，这道是最保险的大盘替代位。</li>
+<li>已经点了 lamb 或 tomahawk 时，这道就没有必要再叠。</li></ul>
+          </div>
+        </article></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Editorial Read</span>
-        <h2>简短结论</h2>
-        <p>场景最强的一家，像半岛版花园式地中海会所；适合庆祝、约会、以及愿意为氛围买单的晚饭。</p>
-        <p class="note">这里的 `best for / skip if / order bias` 是基于菜单、店型、公开 listing 与评价信号整理后的编辑判断，不等同于店方原始表述。</p>
-      </article>
+    <section class="footer">
+      <p><strong>来源说明：</strong>菜名与价格来自 Amara 当前官方 dinner PDF；关于“scene-driven、适合庆祝、甜点值得留胃”这些判断，来自上个月更新的 Restaurantji 摘要、OpenTable 近端公开页面以及品牌自身文案，其中部分属于基于菜单与评论结构的推断。</p>
+      <p style="margin-top:8px;"><strong>参考链接：</strong> <a href="https://www.amararestaurants.com/menus/" target="_blank" rel="noopener noreferrer">www.amararestaurants.com/menus/</a> · <a href="https://www.amararestaurants.com/location/amara/" target="_blank" rel="noopener noreferrer">www.amararestaurants.com/location/amara/</a> · <a href="https://media-cdn.getbento.com/accounts/95f6095c86baaad751e4b935ec905346/media/jc4B9iEiSLKbGyvStSPP_Amara-Dinner-081825-NEW%20FORMT.pdf" target="_blank" rel="noopener noreferrer">media-cdn.getbento.com/accounts/95f6095c86baaad751e4b935ec905346/media/jc4B9iEiSLKbGyvStSPP_Amara-Dinner-081825-NEW%20FORMT.pdf</a> · <a href="https://www.restaurantji.com/ca/belmont/amara-/" target="_blank" rel="noopener noreferrer">www.restaurantji.com/ca/belmont/amara-/</a> · <a href="https://www.opentable.com/r/amara-san-francisco" target="_blank" rel="noopener noreferrer">www.opentable.com/r/amara-san-francisco</a></p>
+    </section>
+
+    <section class="site-footer" style="margin-top:18px; border-radius:22px; padding:18px 20px;">
+      <div style="font-family:'Baskerville','Iowan Old Style',serif; font-size:24px; margin-bottom:6px;">Peninsula Living</div>
+      <p style="color:var(--muted); font-size:14px; line-height:1.6;">
+        This page now lives inside the Restaurants section. Return to the index if you want the broader Peninsula Living structure rather than a single dinner dossier.
+      </p>
     </section>
   </main>
 </body>

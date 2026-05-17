@@ -3,188 +3,303 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kabul Afghan Cuisine | Peninsula Living</title>
+  <title>Kabul Afghan Cuisine 点菜推荐</title>
   <style>
     :root {
-      --bg: #f4ede3;
-      --paper: rgba(255, 250, 243, 0.94);
-      --ink: #1f1815;
-      --muted: #6a5f56;
-      --wine: #873428;
-      --pine: #27453f;
-      --line: rgba(31, 24, 21, 0.1);
-      --shadow: 0 22px 56px rgba(58, 37, 23, 0.12);
+      --bg: #f4efe6;
+      --paper: #fffaf3;
+      --ink: #1f1a17;
+      --muted: #6d6259;
+      --accent: #8f2f23;
+      --accent-2: #d9b16f;
+      --line: #e6d9cb;
+      --card: #fffdf9;
+      --shadow: 0 18px 50px rgba(64, 38, 19, 0.12);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
       color: var(--ink);
       background:
-        radial-gradient(circle at top right, rgba(135, 52, 40, 0.12), transparent 24%),
-        radial-gradient(circle at left center, rgba(39, 69, 63, 0.08), transparent 24%),
-        linear-gradient(180deg, #f8f1e6 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, rgba(217, 177, 111, 0.25), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+      line-height: 1.55;
     }
-    a { color: inherit; text-decoration: none; }
     .wrap {
-      width: min(1120px, calc(100vw - 28px));
+      width: min(1160px, calc(100vw - 28px));
       margin: 0 auto;
-      padding: 20px 0 56px;
+      padding: 22px 0 56px;
     }
-    .bar, .hero, .panel {
-      border: 1px solid rgba(255,255,255,0.72);
-      background: var(--paper);
+    .site-bar,
+    .site-footer {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
     }
-    .bar {
+    .site-bar {
       border-radius: 22px;
-      padding: 15px 18px;
+      padding: 14px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 14px;
       margin-bottom: 18px;
     }
-    .brand {
+    .site-brand {
       display: flex;
       flex-direction: column;
       gap: 4px;
     }
-    .brand small, .eyebrow {
+    .site-brand span {
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--wine);
-      font-weight: 700;
+      color: var(--accent);
     }
-    .brand strong, h1, h2, h3 {
+    .site-brand strong {
+      font-size: 23px;
       font-family: "Baskerville", "Iowan Old Style", serif;
-      font-weight: 700;
     }
-    .brand strong { font-size: 24px; }
-    .nav {
+    .site-nav {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-    .nav a, .hero-links a {
-      border: 1px solid var(--line);
+    .site-nav a {
+      border: 1px solid rgba(143, 47, 35, 0.12);
       border-radius: 999px;
       padding: 10px 13px;
       font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.65);
+      background: rgba(255, 255, 255, 0.66);
+      text-decoration: none;
     }
     .hero {
-      border-radius: 32px;
-      overflow: hidden;
       display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      margin-bottom: 18px;
+      grid-template-columns: 1.2fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+    .hero-copy,
+    .hero-photo,
+    .panel,
+    .dish-card {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
+      box-shadow: var(--shadow);
     }
     .hero-copy {
-      padding: 30px;
-      background: linear-gradient(160deg, rgba(255,251,246,0.98) 0%, rgba(245,235,223,0.92) 100%);
+      padding: 28px;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
-    .hero-side {
-      padding: 30px;
-      background:
-        radial-gradient(circle at top right, rgba(201,165,109,0.28), transparent 26%),
-        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
-      color: #f7f1e7;
+    .hero-photo {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 320px;
+      position: relative;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-photo .review-trend {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(25, 20, 17, 0.68);
+      color: #fffaf3;
+      backdrop-filter: blur(8px);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.08;
     }
     h1 {
-      margin: 0 0 14px;
-      font-size: clamp(38px, 6vw, 64px);
-      line-height: 0.94;
-      letter-spacing: -0.03em;
+      font-size: clamp(34px, 5.5vw, 58px);
+      margin-bottom: 12px;
     }
     h2 {
-      margin: 0 0 12px;
-      font-size: 32px;
-      line-height: 1.02;
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 12px;
     }
-    p {
-      margin: 0;
-      line-height: 1.7;
+    h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
     }
+    p { margin: 0; }
     .lede {
-      max-width: 42ch;
       font-size: 18px;
-      color: #382f2a;
-    }
-    .hero-side p {
-      color: rgba(247,241,231,0.82);
+      color: #332a25;
+      max-width: 44ch;
     }
     .chips {
       display: flex;
       flex-wrap: wrap;
-      gap: 9px;
+      gap: 10px;
       margin-top: 18px;
     }
     .chip {
-      padding: 8px 11px;
+      border: 1px solid rgba(143, 47, 35, 0.14);
       border-radius: 999px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 13px;
       color: var(--muted);
-      background: rgba(255,255,255,0.68);
-      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.62);
     }
-    .hero-links {
+    .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
-    .hero-links a.primary {
-      background: var(--wine);
+    .hero-actions a {
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      text-decoration: none;
+      border: 1px solid rgba(143, 47, 35, 0.14);
+      background: rgba(255,255,255,0.66);
+      color: var(--muted);
+    }
+    .hero-actions a.primary {
+      background: var(--accent);
+      color: #fffaf3;
       border-color: transparent;
-      color: #fbf5ea;
     }
-    .grid {
+    .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 20px;
+      margin-bottom: 24px;
     }
     .panel {
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 24px;
-      background: linear-gradient(180deg, rgba(255,252,248,0.94), rgba(249,242,233,0.92));
     }
-    ul {
-      margin: 0;
+    .panel ul,
+    .dish-card ul {
+      margin: 10px 0 0;
       padding-left: 18px;
-      color: #352d28;
-      line-height: 1.7;
     }
-    li + li {
-      margin-top: 8px;
+    .panel li,
+    .dish-card li {
+      margin: 8px 0;
     }
-    .source-list a {
-      text-decoration: underline;
-      color: var(--pine);
+    .section-title {
+      margin: 4px 0 14px;
     }
-    .note {
-      margin-top: 14px;
+    .menu-plan {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+    .plan-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(252,247,240,0.95) 100%);
+      border: 1px solid var(--line);
+    }
+    .plan-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .plan-card p {
+      margin-top: 5px;
+    }
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .dish-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card);
+    }
+    .dish-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .dish-body {
+      padding: 20px;
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+    .price {
+      color: var(--accent);
+      font-size: 18px;
+      white-space: nowrap;
+    }
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .label {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      display: block;
+    }
+    .footer {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
       color: var(--muted);
       font-size: 14px;
     }
+    a { color: inherit; }
     @media (max-width: 900px) {
-      .hero, .grid {
-        grid-template-columns: 1fr;
-      }
+      .hero, .grid-2, .dish-grid, .menu-plan { grid-template-columns: 1fr; }
+      .hero-photo { min-height: 260px; }
     }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <section class="bar">
-      <div class="brand">
-        <small>Peninsula Living</small>
-        <strong>Restaurant Dossier</strong>
+    <section class="site-bar">
+      <div class="site-brand">
+        <span>Peninsula Living</span>
+        <strong>Restaurants</strong>
       </div>
-      <nav class="nav">
+      <nav class="site-nav">
         <a href="peninsula_living.html">Home</a>
         <a href="peninsula_restaurants.html">Restaurants</a>
         <a href="peninsula_hiking_trails.html">Hiking Trails</a>
@@ -194,69 +309,147 @@
 
     <section class="hero">
       <div class="hero-copy">
-        <span class="eyebrow">Peninsula Restaurant Model</span>
-        <h1>Kabul Afghan Cuisine</h1>
-        <p class="lede">半岛阿富汗菜老牌稳店，第一次吃阿富汗菜也比较容易点到正路。</p>
-        <div class="chips">
-          <span class="chip">阿富汗</span>
-          <span class="chip">San Carlos</span>
-          <span class="chip">Google 4.6/5（Sluurpy 转引，约1195条）；Yelp 4.5/5（约1.9k条）</span>
-          <span class="chip">$$</span>
-        </div>
-        <div class="hero-links">
-          <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Kabul%20Afghan%20Cuisine%20San%20Carlos%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
-          <a href="peninsula_restaurants.html">Back to Restaurants</a>
+        <div>
+          <span class="eyebrow">Peninsula Living / Restaurant Guide</span>
+          <h1>Kabul Afghan Cuisine<br>点菜推荐</h1>
+          <p class="lede">Kabul 的价值不在于新，而在于它把一套老派 Afghan comfort line 维持得很稳。第一次来最该做的不是东点西点，而是围绕 dumpling + pallaw + mixed kabab 这三条主线，快速判断你更喜欢它的炖煮线还是炭烤线。</p>
+          <div class="chips"><span class="chip">老牌阿富汗</span><span class="chip">第一次也好点</span><span class="chip">米饭烤串线</span><span class="chip">不靠场景</span></div>
+          <div class="hero-actions">
+            <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Kabul%20Afghan%20Cuisine%20San%20Carlos%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            <a href="peninsula_restaurants.html">Back to Restaurants</a>
+          </div>
         </div>
       </div>
-      <div class="hero-side">
-        <span class="eyebrow">Source Note</span>
-        <h2>这家店更像什么</h2>
-        <p>评分来自 Sluurpy 对 Google 等平台的公开聚合，以及 Yelp listing。order_bias 主要基于 Yelp 高频菜名与聚合菜单信号推断。</p>
+      <div class="hero-photo">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&amp;fit=crop&amp;w=1600&amp;q=80" alt="Kabul Afghan Cuisine">
+        <div class="review-trend">
+          <span class="eyebrow" style="color:#f1c37d; margin-bottom:6px;">Recent Review Trend</span>
+          <div>最新能直接确认的公开评论信号里，Yelp 的页面是 2026 年 1 月版，并且搜索结果里能看到 2025-12-06 的长评仍在被抓取。近端可见信号没有出现明显的一星潮，反而还是重复强化它“老牌、 family-owned、第一次吃阿富汗菜也不容易踩雷”的印象；真正的风险不在口碑崩，而在你若期待轻盈或时髦场景，会觉得它太传统。</div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="grid-2">
       <article class="panel">
-        <span class="eyebrow">Best For</span>
-        <h2>适合什么局</h2>
-        <ul><li>带长辈</li>
-<li>第一次吃阿富汗菜</li>
-<li>想吃炖菜+烤串</li></ul>
-        <div class="note">
-          <span class="eyebrow">Skip If</span>
-          <ul><li>想要轻小盘路线</li>
-<li>不想吃米饭为主</li>
-<li>只想要很时髦场景</li></ul>
+        <h2 class="section-title">这家店怎么点才对</h2>
+        <ul><li>第一次来先从 dumplings 入手，Mantoo 或 Aushak 都比随便点 side 更能说明问题。</li>
+<li>主菜里一定要有一份 Quabili Pallaw，它是整家店最能代表自身语汇的一道。</li>
+<li>如果同桌有人偏爱烤肉，就再接 Kabul&#x27;s Combination Kabab；这样炖煮线和烤串线都会覆盖到。</li>
+<li>Lawang 适合当“比较温和、奶香一点”的 chicken option，但不要把它当成整晚唯一主角。</li>
+<li>甜点如果还吃得下，Firnee 比盲点冰淇淋更像完整收尾。</li></ul>
+      </article>
+      <article class="panel">
+        <h2 class="section-title">我给你的总判断</h2>
+        <ul><li>它不是一间靠房间、酒单或新鲜感取胜的店，而是一间靠结构稳定性和传统 comfort 建立信任的店。</li>
+<li>如果你要带第一次吃阿富汗菜的人，这家比很多更先锋或更混搭的选择都安全。</li>
+<li>如果你讨厌米饭、炖菜和羊肉香料线，这里就会显得很重。</li>
+<li>公开评价里最强的不是某个单一网红菜，而是整体“不会乱来”的稳定印象。</li>
+<li>综合判断：它是半岛很有价值的老派答案，但前提是按经典点，而不是期待惊艳型 seasonal creativity。</li></ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-bottom:24px;">
+      <h2 class="section-title">标准单</h2>
+      <div class="menu-plan"><div class="plan-card">
+          <strong>前菜</strong>
+          <p>MANTOO</p><p>AUSHAK</p><p>BULANEE</p>
         </div>
-      </article>
-
-      <article class="panel">
-        <span class="eyebrow">Ordering Bias</span>
-        <h2>怎么点更合理</h2>
-        <ul><li>第一次去可从 Mantoo / Aushak / Bulanee 这类前菜起手，再补 1 个主菜建立基线。</li>
-<li>主菜优先看 Lawang、Quabili Pallaw、Combination Kabab 这类公开评论高频项。</li>
-<li>若怕全桌太重，炖菜和烤串最好二选一主打，不必同时堆满。</li></ul>
-        <div class="note">
-          <span class="eyebrow">Cautions</span>
-          <ul><li>官网当前公开可访问性较弱，营业与菜单信息主要依赖聚合页和公开 listing。</li>
-<li>菜路偏传统炖菜、烤肉和米饭；如果你要现代轻盈感，这家不对口。</li></ul>
+<div class="plan-card">
+          <strong>主线一：饭</strong>
+          <p>QUABILI PALLAW</p><p>LAWANG</p>
         </div>
-      </article>
+<div class="plan-card">
+          <strong>主线二：烤串</strong>
+          <p>KABUL&#x27;S COMBINATION KABAB</p><p>CHUPAN</p><p>Kubida Kabab</p>
+        </div>
+<div class="plan-card">
+          <strong>甜点</strong>
+          <p>FIRNEE</p><p>BAKLAVA</p>
+        </div></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Sources</span>
-        <h2>参考链接</h2>
-        <ul class="source-list"><li><a href="https://www.sluurpy.com/en/san-carlos/restaurant/4068609/kabul-afghan-cuisine" target="_blank" rel="noopener noreferrer">www.sluurpy.com/en/san-carlos/restaurant/4068609/kabul-afghan-cuisine</a></li>
-<li><a href="https://www.yelp.com/biz/kabul-afghan-cuisine-san-carlos" target="_blank" rel="noopener noreferrer">www.yelp.com/biz/kabul-afghan-cuisine-san-carlos</a></li>
-<li><a href="https://sancarloslife.com/restaurant/kabul-afghan-cuisine-san-carlos/" target="_blank" rel="noopener noreferrer">sancarloslife.com/restaurant/kabul-afghan-cuisine-san-carlos/</a></li></ul>
-      </article>
+    <section>
+      <h2 style="margin: 0 0 16px;">推荐菜细讲</h2>
+      <div class="dish-grid"><article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="MANTOO">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>MANTOO</h3>
+              <span class="price">$18.95</span>
+            </div>
+            <p class="tagline">第一次来最该点的 starter，不点它基本等于没进 Kabul 的门。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>onion and ground lamb filled steamed dumplings</li>
+<li>yogurt</li>
+<li>mixed vegetables</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果同桌有人吃不了羊，先确认是否可做无肉酱版本。</li>
+<li>和 Aushak 二选一时，第一次更建议先点 Mantoo。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="QUABILI PALLAW">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>QUABILI PALLAW</h3>
+              <span class="price">$20.95</span>
+            </div>
+            <p class="tagline">整家店最像“国民主菜”的一道，判断 Kabul 值不值得回访基本看它。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>slow cooked lamb</li>
+<li>delicately seasoned rice</li>
+<li>carrot strips and raisins</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果你平时不爱甜咸交错的米饭，先做好风味预期。</li>
+<li>和 mixed kabab 搭配最合理，不建议再叠第二个重饭菜。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="KABUL&#x27;S COMBINATION KABAB">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>KABUL&#x27;S COMBINATION KABAB</h3>
+              <span class="price">$27.95</span>
+            </div>
+            <p class="tagline">最有效率的点法，用一盘把 Kabul 的烤串基本盘看清楚。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>choice of two skewers</li>
+<li>lamb / chicken / fish / shrimp / beef combinations</li>
+<li>served with pallaw</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>第一次最稳是 lamb + chicken，不必一上来玩海鲜组合。</li>
+<li>如果已经点了 Quabili Pallaw，这道可以全桌 share，不一定每人都点大盘。</li></ul>
+          </div>
+        </article>
+<article class="dish-card">
+          <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="LAWANG">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>LAWANG</h3>
+              <span class="price">当前公开抓取页未清晰显示</span>
+            </div>
+            <p class="tagline">给整桌一个更柔和、更奶香的 chicken option，避免全桌都走红肉重路数。</p>
+            <span class="label">原材料亮点</span>
+            <ul><li>slow cooked creamy chunks of chicken breast</li>
+<li>mushroom and onion</li>
+<li>cilantro and garlic</li></ul>
+            <span class="label">Tips</span>
+            <ul><li>如果同桌有人不吃羊，这道是最容易被接受的安全位。</li>
+<li>它更像补平衡，不是整桌唯一主角。</li></ul>
+          </div>
+        </article></div>
+    </section>
 
-      <article class="panel">
-        <span class="eyebrow">Editorial Read</span>
-        <h2>简短结论</h2>
-        <p>半岛阿富汗菜老牌稳店，第一次吃阿富汗菜也比较容易点到正路。</p>
-        <p class="note">这里的 `best for / skip if / order bias` 是基于菜单、店型、公开 listing 与评价信号整理后的编辑判断，不等同于店方原始表述。</p>
-      </article>
+    <section class="footer">
+      <p><strong>来源说明：</strong>菜名来自 Kabul 官方菜单页；由于该页在可抓取文本里不稳定暴露价格，部分价格补自 Allmenus 与公开菜单索引，可能与店内实时价格有轻微偏差。关于“该怎么点”的判断是基于当前菜单结构与近端公开评论信号的推断。</p>
+      <p style="margin-top:8px;"><strong>参考链接：</strong> <a href="https://www.kabulcuisine.co/" target="_blank" rel="noopener noreferrer">www.kabulcuisine.co/</a> · <a href="https://www.kabulcuisine.co/menu" target="_blank" rel="noopener noreferrer">www.kabulcuisine.co/menu</a> · <a href="https://www.yelp.com/biz/kabul-afghan-cuisine-san-carlos" target="_blank" rel="noopener noreferrer">www.yelp.com/biz/kabul-afghan-cuisine-san-carlos</a> · <a href="https://www.tripadvisor.com/Restaurant_Review-g33011-d365830-Reviews-Kabul_Afghan_Cuisine-San_Carlos_California.html" target="_blank" rel="noopener noreferrer">www.tripadvisor.com/Restaurant_Review-g33011-d365830-Reviews-Kabul_Afghan_Cuisine-San_Carlos_California.html</a> · <a href="https://www.allmenus.com/ca/san-carlos/279432-kabul-afghan-cuisine/menu/" target="_blank" rel="noopener noreferrer">www.allmenus.com/ca/san-carlos/279432-kabul-afghan-cuisine/menu/</a> · <a href="https://www.sluurpy.com/en/san-carlos/restaurant/4068609/kabul-afghan-cuisine" target="_blank" rel="noopener noreferrer">www.sluurpy.com/en/san-carlos/restaurant/4068609/kabul-afghan-cuisine</a></p>
+    </section>
+
+    <section class="site-footer" style="margin-top:18px; border-radius:22px; padding:18px 20px;">
+      <div style="font-family:'Baskerville','Iowan Old Style',serif; font-size:24px; margin-bottom:6px;">Peninsula Living</div>
+      <p style="color:var(--muted); font-size:14px; line-height:1.6;">
+        This page now lives inside the Restaurants section. Return to the index if you want the broader Peninsula Living structure rather than a single dinner dossier.
+      </p>
     </section>
   </main>
 </body>
