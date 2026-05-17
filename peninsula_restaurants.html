@@ -6,126 +6,354 @@
   <title>Peninsula Living | Restaurants</title>
   <style>
     :root {
-      --bg: #f1e9dd;
-      --paper: rgba(255, 250, 244, 0.92);
-      --ink: #211915;
-      --muted: #6b6258;
-      --wine: #7e3126;
-      --pine: #27443f;
-      --line: rgba(33, 25, 21, 0.1);
-      --shadow: 0 24px 56px rgba(58, 37, 23, 0.12);
+      --bg: #efe6db;
+      --paper: rgba(255, 250, 243, 0.92);
+      --paper-2: rgba(248, 241, 231, 0.9);
+      --ink: #1f1815;
+      --muted: #675d53;
+      --wine: #7b3026;
+      --pine: #27453f;
+      --gold: #caa267;
+      --line: rgba(31, 24, 21, 0.1);
+      --shadow: 0 26px 64px rgba(54, 35, 20, 0.13);
+      --radius: 28px;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       color: var(--ink);
       font-family: "Avenir Next", "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at right top, rgba(126, 49, 38, 0.15), transparent 24%),
-        linear-gradient(180deg, #f7f0e6 0%, var(--bg) 100%);
+        radial-gradient(circle at top right, rgba(202, 162, 103, 0.24), transparent 22%),
+        radial-gradient(circle at left center, rgba(39, 69, 63, 0.1), transparent 24%),
+        linear-gradient(180deg, #f8f0e5 0%, #efe6db 48%, #e8ddd0 100%);
     }
     a { color: inherit; text-decoration: none; }
-    .shell { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 20px 0 48px; }
-    .bar, .hero, .card {
-      background: var(--paper);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
+    .shell {
+      width: min(1200px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
     }
-    .bar {
-      border-radius: 20px;
-      padding: 14px 16px;
+    .topbar,
+    .hero,
+    .panel,
+    .group,
+    .card,
+    .footer-note {
+      border: 1px solid rgba(255, 255, 255, 0.68);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .topbar {
+      border-radius: 22px;
+      padding: 16px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       margin-bottom: 18px;
     }
-    .brand { font-family: "Baskerville", "Iowan Old Style", serif; font-size: 23px; }
-    .nav { display: flex; flex-wrap: wrap; gap: 10px; }
-    .nav a {
-      padding: 10px 13px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.62);
-      border: 1px solid var(--line);
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
-    .hero {
-      border-radius: 30px;
-      padding: 28px;
-      margin-bottom: 18px;
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 20px;
-    }
+    .brand small,
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 10px;
       font-size: 11px;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--wine);
       font-weight: 700;
     }
-    h1, h2, h3 {
-      margin: 0;
+    .brand strong,
+    h1,
+    h2,
+    h3 {
       font-family: "Baskerville", "Iowan Old Style", serif;
-      line-height: 1.04;
+      font-weight: 700;
     }
-    h1 { font-size: clamp(38px, 6vw, 64px); margin-bottom: 12px; }
-    p { margin: 0; color: #362e29; line-height: 1.65; }
-    .hero-side {
-      border-radius: 24px;
-      padding: 22px;
-      background: linear-gradient(160deg, #223a35 0%, #2d4d47 100%);
-      color: #f8f2e8;
+    .brand strong { font-size: 24px; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .hero-side p { color: rgba(248, 242, 232, 0.84); }
-    .grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 18px; }
-    .card { border-radius: 26px; padding: 24px; }
-    .entry-card {
+    .nav a,
+    .jump a,
+    .hero-links a,
+    .actions a {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.62);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .hero {
+      border-radius: 34px;
+      overflow: hidden;
+      margin-bottom: 18px;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 18px;
-      align-items: center;
     }
-    .preview {
-      border-radius: 22px;
-      min-height: 240px;
+    .hero-copy {
+      padding: 34px;
       background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.28)),
-        url("https://static-content.owner.com/funnel/images/8608b6a6-7f7e-482c-8c8d-c3fd135c11c3?v=2704228040") center/cover;
+        linear-gradient(160deg, rgba(255, 251, 246, 0.97) 0%, rgba(244, 234, 221, 0.92) 100%);
     }
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 18px; }
-    .chip {
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.93;
+      letter-spacing: -0.035em;
+    }
+    .hero-copy p,
+    .card p,
+    .footer-note p {
+      margin: 0;
+      line-height: 1.68;
+      color: #352d28;
+    }
+    .hero-copy p {
+      max-width: 45ch;
+      font-size: 17px;
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .hero-links a.primary,
+    .actions a.primary {
+      background: var(--wine);
+      color: #fbf5ea;
+      border-color: transparent;
+    }
+    .hero-side {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      color: #f7f1e7;
+      background:
+        radial-gradient(circle at top right, rgba(202, 162, 103, 0.38), transparent 26%),
+        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .hero-side p {
+      color: rgba(247, 241, 231, 0.82);
+    }
+    .hero-side::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -70px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 250, 243, 0.12), transparent 60%);
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .stat {
+      position: relative;
+      z-index: 1;
+      border-radius: 20px;
+      padding: 16px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+    .stat span {
+      display: block;
+      font-size: 12px;
+      color: rgba(247, 241, 231, 0.74);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.45;
+    }
+    .panel {
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 18px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 18px;
+      background: linear-gradient(180deg, rgba(255, 252, 248, 0.92), rgba(248, 241, 231, 0.94));
+    }
+    .panel h2,
+    .group h2 {
+      margin: 0 0 10px;
+      font-size: 34px;
+      line-height: 1.02;
+    }
+    .jump {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-content: start;
+    }
+    .groups {
+      display: grid;
+      gap: 18px;
+    }
+    .group {
+      border-radius: 30px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255, 252, 248, 0.95), rgba(249, 242, 233, 0.92));
+    }
+    .group-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .group-head p {
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill {
       padding: 8px 11px;
       border-radius: 999px;
       font-size: 12px;
       color: var(--muted);
       background: rgba(255, 255, 255, 0.7);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(31, 24, 21, 0.08);
     }
-    ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.65; }
-    .cta {
-      display: inline-flex;
-      margin-top: 18px;
-      padding: 12px 15px;
-      border-radius: 999px;
-      background: var(--wine);
-      color: #fbf5ea;
-      font-size: 13px;
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .card {
+      border-radius: 24px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 245px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(248, 241, 231, 0.92));
+    }
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.02;
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    .rating {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      border-radius: 16px;
+      background: rgba(123, 48, 38, 0.08);
+      color: var(--wine);
+      font-size: 12px;
       font-weight: 700;
+      line-height: 1.35;
+      text-align: right;
+      min-width: 82px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .meta span {
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.66);
+    }
+    .address {
+      color: #403733;
+      font-size: 14px;
+      line-height: 1.58;
+      min-height: 66px;
+    }
+    .actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-note {
+      border-radius: 28px;
+      margin-top: 18px;
+      padding: 22px 24px;
+      background:
+        linear-gradient(180deg, rgba(123, 48, 38, 0.05), rgba(39, 69, 63, 0.05)),
+        var(--paper-2);
+    }
+    .footer-note strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "Baskerville", "Iowan Old Style", serif;
+      font-size: 28px;
+    }
+    @media (max-width: 1080px) {
+      .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 900px) {
-      .hero, .grid, .entry-card { grid-template-columns: 1fr; }
+      .hero,
+      .panel { grid-template-columns: 1fr; }
+      .group-head { flex-direction: column; align-items: start; }
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(100vw - 18px, 1200px); padding-top: 10px; }
+      .topbar,
+      .hero-copy,
+      .hero-side,
+      .panel,
+      .group,
+      .footer-note { padding-left: 18px; padding-right: 18px; }
+      .topbar { border-radius: 18px; }
+      .brand strong { font-size: 22px; }
+      .stat-grid,
+      .card-grid { grid-template-columns: 1fr; }
+      .card { min-height: 0; }
+      h1 { font-size: 46px; }
+      .panel h2,
+      .group h2 { font-size: 30px; }
+      .card h3 { font-size: 26px; }
     }
   </style>
 </head>
 <body>
   <main class="shell">
-    <section class="bar">
-      <div class="brand">Peninsula Living</div>
+    <section class="topbar">
+      <div class="brand">
+        <small>Peninsula Living</small>
+        <strong>Restaurants</strong>
+      </div>
       <nav class="nav">
         <a href="peninsula_living.html">Home</a>
         <a href="peninsula_hiking_trails.html">Hiking Trails</a>
@@ -134,44 +362,381 @@
     </section>
 
     <section class="hero">
-      <div>
-        <span class="eyebrow">Restaurants</span>
-        <h1>饭店</h1>
-        <p>这里收的是“值得留档”的餐厅推荐页，不只是临时订位前看一眼，而是能反复回来看：适合什么局、怎么点才不浪费、哪几道才是这家店真正的重心。</p>
+      <div class="hero-copy">
+        <div>
+          <span class="eyebrow">Google Maps Shared List</span>
+          <h1>Date Night<br>餐厅索引</h1>
+          <p>这页不是我额外重排的一份新推荐，而是把你这份 Google Maps shared list 整理成一个真正能用的餐厅页：按地理动线分组，桌面和手机都能快速扫，点进去直接跳 Maps。</p>
+        </div>
+        <div class="hero-links">
+          <a class="primary" href="https://maps.app.goo.gl/bNd4WiAd2rBh6fmHA" target="_blank" rel="noopener noreferrer">打开原始列表</a>
+          <a href="doppio_zero_san_carlos_recommendation.html">看 Doppio 深度条目</a>
+        </div>
       </div>
       <div class="hero-side">
-        <p>当前先放进一篇已经成型的 San Carlos 条目。后面如果继续做 Peninsula 私人 dining index，这个栏目会越来越像一个更讲究使用感的 restaurant dossier library。</p>
+        <p>更像一个半岛晚餐地图，而不是“精选 5 家”。San Carlos 附近可以直接拿来决定今晚吃什么，远一点的四家则更像值得专门去一趟的目的地晚餐。</p>
+        <div class="stat-grid">
+          <div class="stat">
+            <strong>23</strong>
+            <span>places in the list</span>
+          </div>
+          <div class="stat">
+            <strong>11</strong>
+            <span>San Carlos anchors</span>
+          </div>
+          <div class="stat">
+            <strong>3</strong>
+            <span>easy map jumps</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
-      <article class="card">
-        <div class="entry-card">
-          <div>
-            <span class="eyebrow">Featured Restaurant</span>
-            <h2 style="font-size:40px; margin-bottom:10px;">Doppio Zero San Carlos</h2>
-            <p>这篇条目已经不是“随便推荐几道菜”了，而是把 dinner scene 本身讲清楚：它更适合热闹的朋友局，主轴是 pizza 和共享节奏，不该被当成重 pasta 的美式意餐馆。</p>
-            <div class="chips">
-              <span class="chip">group dinner</span>
-              <span class="chip">pizza-first ordering</span>
-              <span class="chip">San Carlos</span>
-            </div>
-            <a class="cta" href="doppio_zero_san_carlos_recommendation.html">打开条目</a>
-          </div>
-          <div class="preview" aria-hidden="true"></div>
-        </div>
-      </article>
+    <section class="panel">
+      <div>
+        <span class="eyebrow">How To Use</span>
+        <h2>先按动线看，再按口味看</h2>
+        <p>如果是临时想吃，就先扫 `San Carlos Core`。如果是开车十几分钟内解决一顿好饭，看 `Mid-Peninsula`。如果今晚想要一个更像 outing 的 dinner scene，再看 `Destination Nights`。</p>
+      </div>
+      <div class="jump">
+        <a href="#san-carlos">San Carlos Core</a>
+        <a href="#mid-peninsula">Mid-Peninsula</a>
+        <a href="#destination">Destination Nights</a>
+        <a href="https://maps.app.goo.gl/bNd4WiAd2rBh6fmHA" target="_blank" rel="noopener noreferrer">Original Maps List</a>
+      </div>
+    </section>
 
-      <aside class="card">
-        <span class="eyebrow">Editorial Lens</span>
-        <h3 style="font-size:28px;">这类条目会怎么写</h3>
-        <ul>
-          <li>先判断餐厅真正适合什么场景，而不是只写“招牌菜”。</li>
-          <li>区分“好吃”和“值得带人去”这两件事。</li>
-          <li>多人局优先写点菜结构和桌面平衡，不只列菜名。</li>
-          <li>尽量给出更清楚的风格判断，比如偏 neighborhood Italian 还是更 regional。</li>
-        </ul>
-      </aside>
+    <section class="groups">
+      <section class="group" id="san-carlos">
+        <div class="group-head">
+          <div>
+            <span class="eyebrow">Closest Cluster</span>
+            <h2>San Carlos Core</h2>
+            <p>这一组最适合做你们家的默认近场晚餐库。不是都一样强，但动线顺、复用率高，而且能覆盖从 casual 到更像正式约饭的不同强度。</p>
+            <div class="pill-row">
+              <span class="pill">Laurel / El Camino cluster</span>
+              <span class="pill">quick decision friendly</span>
+              <span class="pill">11 places</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Soko Soko Japanese Cuisine</h3>
+              <div class="rating">4.5<br>30–80</div>
+            </div>
+            <div class="meta"><span>Japanese</span><span>San Carlos</span></div>
+            <p class="address">1533 Laurel Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Soko%20Soko%20Japanese%20Cuisine%2C%201533%20Laurel%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Takumi</h3>
+              <div class="rating">4.6<br>10–60</div>
+            </div>
+            <div class="meta"><span>Japanese</span><span>San Carlos</span></div>
+            <p class="address">744 Laurel Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Takumi%2C%20744%20Laurel%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Bistro Mitte</h3>
+              <div class="rating">4.5<br>30–50</div>
+            </div>
+            <div class="meta"><span>German</span><span>San Carlos</span></div>
+            <p class="address">751 Laurel Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Bistro%20Mitte%2C%20751%20Laurel%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Impasto by Terun</h3>
+              <div class="rating">4.6<br>30–60</div>
+            </div>
+            <div class="meta"><span>Pizza</span><span>San Carlos</span></div>
+            <p class="address">661 El Camino Real, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Impasto%20by%20Terun%2C%20661%20El%20Camino%20Real%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Doppio Zero San Carlos</h3>
+              <div class="rating">4.4<br>20–70</div>
+            </div>
+            <div class="meta"><span>Southern Italian</span><span>San Carlos</span></div>
+            <p class="address">Laurel Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Doppio%20Zero%20San%20Carlos%2C%20Laurel%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+              <a href="doppio_zero_san_carlos_recommendation.html">Read Note</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Saffron</h3>
+              <div class="rating">4.2<br>30–60</div>
+            </div>
+            <div class="meta"><span>Indian</span><span>San Carlos</span></div>
+            <p class="address">1143 San Carlos Avenue, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Saffron%2C%201143%20San%20Carlos%20Avenue%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Kabul Afghan Cuisine</h3>
+              <div class="rating">4.6<br>20–30</div>
+            </div>
+            <div class="meta"><span>Afghani</span><span>San Carlos</span></div>
+            <p class="address">El Camino Real, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Kabul%20Afghan%20Cuisine%2C%20El%20Camino%20Real%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Elia San Carlos</h3>
+              <div class="rating">4.7<br>20–80</div>
+            </div>
+            <div class="meta"><span>Greek</span><span>San Carlos</span></div>
+            <p class="address">727 Laurel Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Elia%20San%20Carlos%2C%20727%20Laurel%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Domenico Winery</h3>
+              <div class="rating">List<br>save</div>
+            </div>
+            <div class="meta"><span>Winery</span><span>San Carlos</span></div>
+            <p class="address">1697 Industrial Road, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Domenico%20Winery%2C%201697%20Industrial%20Road%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Hakkai Nigiri Bar &amp; Tapas</h3>
+              <div class="rating">List<br>save</div>
+            </div>
+            <div class="meta"><span>Nigiri / Tapas</span><span>San Carlos</span></div>
+            <p class="address">1070 Holly Street, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Hakkai%20Nigiri%20Bar%20and%20Tapas%2C%201070%20Holly%20Street%2C%20San%20Carlos%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>888 Ristorante Italiano</h3>
+              <div class="rating">List<br>save</div>
+            </div>
+            <div class="meta"><span>Italian</span><span>San Carlos</span></div>
+            <p class="address">888 Laurel Street #3951, San Carlos</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=888%20Ristorante%20Italiano%2C%20888%20Laurel%20Street%20San%20Carlos%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+              <a href="weekend_plan_windyhill_888_v4.html">See Plan</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="group" id="mid-peninsula">
+        <div class="group-head">
+          <div>
+            <span class="eyebrow">Short Drive</span>
+            <h2>Mid-Peninsula</h2>
+            <p>这组更像“值得开十几分钟”的近场扩展。San Mateo 能给你更完整的晚饭街区感，Belmont 和 Redwood City 则补上几家风格完全不同的选项。</p>
+            <div class="pill-row">
+              <span class="pill">Belmont</span>
+              <span class="pill">Redwood City</span>
+              <span class="pill">San Mateo</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Donato Enoteca</h3>
+              <div class="rating">4.3<br>50–100</div>
+            </div>
+            <div class="meta"><span>Italian</span><span>Redwood City</span></div>
+            <p class="address">1041 Middlefield Road, Redwood City</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Donato%20Enoteca%2C%201041%20Middlefield%20Road%2C%20Redwood%20City%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Pausa Bar &amp; Cookery</h3>
+              <div class="rating">4.5<br>40–90</div>
+            </div>
+            <div class="meta"><span>Italian</span><span>San Mateo</span></div>
+            <p class="address">223 East 4th Avenue, San Mateo</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Pausa%20Bar%20and%20Cookery%2C%20223%20East%204th%20Avenue%2C%20San%20Mateo%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Shalizaar</h3>
+              <div class="rating">4.3<br>20–30</div>
+            </div>
+            <div class="meta"><span>Persian</span><span>Belmont</span></div>
+            <p class="address">300 El Camino Real, Belmont</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Shalizaar%2C%20300%20El%20Camino%20Real%2C%20Belmont%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Selby's</h3>
+              <div class="rating">4.4<br>100+</div>
+            </div>
+            <div class="meta"><span>Restaurant</span><span>Redwood City</span></div>
+            <p class="address">3001 El Camino Real, Redwood City</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Selby%27s%2C%203001%20El%20Camino%20Real%2C%20Redwood%20City%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Porterhouse</h3>
+              <div class="rating">4.5<br>100+</div>
+            </div>
+            <div class="meta"><span>Steak</span><span>San Mateo</span></div>
+            <p class="address">South B Street, San Mateo</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Porterhouse%2C%20South%20B%20Street%2C%20San%20Mateo%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Ryoshin Sushi</h3>
+              <div class="rating">4.5<br>50–100</div>
+            </div>
+            <div class="meta"><span>Sushi</span><span>Belmont</span></div>
+            <p class="address">1602 El Camino Real, Belmont</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Ryoshin%20Sushi%2C%201602%20El%20Camino%20Real%2C%20Belmont%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Amara</h3>
+              <div class="rating">4.5<br>50–100</div>
+            </div>
+            <div class="meta"><span>Mediterranean</span><span>Belmont</span></div>
+            <p class="address">1015 Alameda de las Pulgas, Belmont</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Amara%2C%201015%20Alameda%20de%20las%20Pulgas%2C%20Belmont%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Espetus Churrascaria</h3>
+              <div class="rating">4.6<br>50–100</div>
+            </div>
+            <div class="meta"><span>Brazilian</span><span>San Mateo</span></div>
+            <p class="address">710 South B Street, San Mateo</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Espetus%20Churrascaria%20Brazilian%20Steakhouse%20San%20Mateo%2C%20710%20South%20B%20Street%2C%20San%20Mateo%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="group" id="destination">
+        <div class="group-head">
+          <div>
+            <span class="eyebrow">Make A Night Of It</span>
+            <h2>Destination Nights</h2>
+            <p>这四家更像“今晚不只是吃饭”。要么位置本身就是 outing，要么餐厅等级明显高于日常附近吃饭的语境，适合专门出门。</p>
+            <div class="pill-row">
+              <span class="pill">San Francisco</span>
+              <span class="pill">Berkeley</span>
+              <span class="pill">Palo Alto / Woodside</span>
+            </div>
+          </div>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <div class="card-top">
+              <h3>Mister Jiu's</h3>
+              <div class="rating">4.3<br>100+</div>
+            </div>
+            <div class="meta"><span>Chinese</span><span>San Francisco</span></div>
+            <p class="address">28 Waverly Place, San Francisco</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Mister%20Jiu%27s%2C%2028%20Waverly%20Place%2C%20San%20Francisco%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>La Marcha Tapas Bar</h3>
+              <div class="rating">4.4<br>30–60</div>
+            </div>
+            <div class="meta"><span>Spanish</span><span>Berkeley</span></div>
+            <p class="address">2026 San Pablo Avenue, Berkeley</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=La%20Marcha%20Tapas%20Bar%2C%202026%20San%20Pablo%20Avenue%2C%20Berkeley%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>Macarena</h3>
+              <div class="rating">4.3<br>40–100</div>
+            </div>
+            <div class="meta"><span>Restaurant</span><span>Palo Alto</span></div>
+            <p class="address">420 Ramona Street, Palo Alto</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=Macarena%20Restaurant%20in%20Palo%20Alto%2C%20420%20Ramona%20Street%2C%20Palo%20Alto%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-top">
+              <h3>The Mountain House</h3>
+              <div class="rating">4.6<br>100+</div>
+            </div>
+            <div class="meta"><span>American</span><span>Woodside</span></div>
+            <p class="address">13808 Skyline Boulevard, Woodside</p>
+            <div class="actions">
+              <a class="primary" href="https://www.google.com/maps/search/?api=1&query=The%20Mountain%20House%2C%2013808%20Skyline%20Boulevard%2C%20Woodside%2C%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+            </div>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <section class="footer-note">
+      <strong>Data Note</strong>
+      <p>页面基于你分享的 Google Maps list 整理，评分、价位和菜系以该列表当前可见信息为主；个别条目在 shared-list 视图里没有完整卡片信息，所以这里只保留了最可靠的可见字段和可点击地图入口。</p>
     </section>
   </main>
 </body>
