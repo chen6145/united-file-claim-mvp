@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hakkai Nigiri Bar &amp; Tapas | Peninsula Living</title>
+  <style>
+    :root {
+      --bg: #f4ede3;
+      --paper: rgba(255, 250, 243, 0.94);
+      --ink: #1f1815;
+      --muted: #6a5f56;
+      --wine: #873428;
+      --pine: #27453f;
+      --line: rgba(31, 24, 21, 0.1);
+      --shadow: 0 22px 56px rgba(58, 37, 23, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(135, 52, 40, 0.12), transparent 24%),
+        radial-gradient(circle at left center, rgba(39, 69, 63, 0.08), transparent 24%),
+        linear-gradient(180deg, #f8f1e6 0%, var(--bg) 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap {
+      width: min(1120px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+    .bar, .hero, .panel {
+      border: 1px solid rgba(255,255,255,0.72);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .bar {
+      border-radius: 22px;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .brand small, .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--wine);
+      font-weight: 700;
+    }
+    .brand strong, h1, h2, h3 {
+      font-family: "Baskerville", "Iowan Old Style", serif;
+      font-weight: 700;
+    }
+    .brand strong { font-size: 24px; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a, .hero-links a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.65);
+    }
+    .hero {
+      border-radius: 32px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      margin-bottom: 18px;
+    }
+    .hero-copy {
+      padding: 30px;
+      background: linear-gradient(160deg, rgba(255,251,246,0.98) 0%, rgba(245,235,223,0.92) 100%);
+    }
+    .hero-side {
+      padding: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(201,165,109,0.28), transparent 26%),
+        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
+      color: #f7f1e7;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      line-height: 1.02;
+    }
+    p {
+      margin: 0;
+      line-height: 1.7;
+    }
+    .lede {
+      max-width: 42ch;
+      font-size: 18px;
+      color: #382f2a;
+    }
+    .hero-side p {
+      color: rgba(247,241,231,0.82);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .chip {
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .hero-links a.primary {
+      background: var(--wine);
+      border-color: transparent;
+      color: #fbf5ea;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      border-radius: 28px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,252,248,0.94), rgba(249,242,233,0.92));
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #352d28;
+      line-height: 1.7;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    .source-list a {
+      text-decoration: underline;
+      color: var(--pine);
+    }
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero, .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="bar">
+      <div class="brand">
+        <small>Peninsula Living</small>
+        <strong>Restaurant Dossier</strong>
+      </div>
+      <nav class="nav">
+        <a href="peninsula_living.html">Home</a>
+        <a href="peninsula_restaurants.html">Restaurants</a>
+        <a href="peninsula_hiking_trails.html">Hiking Trails</a>
+        <a href="peninsula_weekend_plans.html">Weekend Plans</a>
+      </nav>
+    </section>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Peninsula Restaurant Model</span>
+        <h1>Hakkai Nigiri Bar &amp; Tapas</h1>
+        <p class="lede">新店信号不错，偏小而精的现代日料约会店；现在更像值得试，不像已经完全坐实的老牌。</p>
+        <div class="chips">
+          <span class="chip">现代日料 / nigiri + tapas</span>
+          <span class="chip">San Carlos</span>
+          <span class="chip">Restaurantji 4.5/5（22条）；DoorDash 4.2/5（10+）</span>
+          <span class="chip">$$$</span>
+        </div>
+        <div class="hero-links">
+          <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Hakkai%20Nigiri%20Bar%20%26%20Tapas%20San%20Carlos%20CA" target="_blank" rel="noopener noreferrer">Open Maps</a>
+          <a href="peninsula_restaurants.html">Back to Restaurants</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <span class="eyebrow">Source Note</span>
+        <h2>这家店更像什么</h2>
+        <p>评分只能拿到早期公开样本。order_bias 基于官网 signature 文案和 DoorDash 菜单结构推断。</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <span class="eyebrow">Best For</span>
+        <h2>适合什么局</h2>
+        <ul><li>试新店</li>
+<li>小型约会</li>
+<li>想喝点 sake</li></ul>
+        <div class="note">
+          <span class="eyebrow">Skip If</span>
+          <ul><li>只接受传统寿司屋</li>
+<li>想靠大量熟食吃饱</li>
+<li>不想赌新店波动</li></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Ordering Bias</span>
+        <h2>怎么点更合理</h2>
+        <ul><li>官方最明确的 signature 是 Hamachi Carpaccio 和 Iwana Tataki，值得先试。</li>
+<li>如果你担心美式卷物感太重，先点 nigiri / sashimi / premium omakase 线，再补 1-2 个 tapas。</li>
+<li>公开点单平台里 Nigiri Combo、Sashimi Combo、Seared Toro Roll 出现频率高，说明鱼线比杂项更值得优先。</li></ul>
+        <div class="note">
+          <span class="eyebrow">Cautions</span>
+          <ul><li>公开评分样本还少，新店稳定性还需要时间验证。</li>
+<li>店名里的 “Tapas” 不是装饰词，风格确实会拉向现代混搭，不是纯粹 Edomae。</li></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Sources</span>
+        <h2>参考链接</h2>
+        <ul class="source-list"><li><a href="https://www.hakkainigiribar.com/" target="_blank" rel="noopener noreferrer">www.hakkainigiribar.com/</a></li>
+<li><a href="https://www.doordash.com/store/hakkai-nigiri-bar-%26-tapas-san-carlos-37565436/" target="_blank" rel="noopener noreferrer">www.doordash.com/store/hakkai-nigiri-bar-%26-tapas-san-carlos-37565436/</a></li>
+<li><a href="https://www.restaurantji.com/ca/san-carlos/hakkai-nigiri-bar-and-tapas-/" target="_blank" rel="noopener noreferrer">www.restaurantji.com/ca/san-carlos/hakkai-nigiri-bar-and-tapas-/</a></li></ul>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Editorial Read</span>
+        <h2>简短结论</h2>
+        <p>新店信号不错，偏小而精的现代日料约会店；现在更像值得试，不像已经完全坐实的老牌。</p>
+        <p class="note">这里的 `best for / skip if / order bias` 是基于菜单、店型、公开 listing 与评价信号整理后的编辑判断，不等同于店方原始表述。</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

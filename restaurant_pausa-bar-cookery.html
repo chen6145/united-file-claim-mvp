@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pausa Bar &amp; Cookery | Peninsula Living</title>
+  <style>
+    :root {
+      --bg: #f4ede3;
+      --paper: rgba(255, 250, 243, 0.94);
+      --ink: #1f1815;
+      --muted: #6a5f56;
+      --wine: #873428;
+      --pine: #27453f;
+      --line: rgba(31, 24, 21, 0.1);
+      --shadow: 0 22px 56px rgba(58, 37, 23, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(135, 52, 40, 0.12), transparent 24%),
+        radial-gradient(circle at left center, rgba(39, 69, 63, 0.08), transparent 24%),
+        linear-gradient(180deg, #f8f1e6 0%, var(--bg) 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap {
+      width: min(1120px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 20px 0 56px;
+    }
+    .bar, .hero, .panel {
+      border: 1px solid rgba(255,255,255,0.72);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .bar {
+      border-radius: 22px;
+      padding: 15px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .brand small, .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--wine);
+      font-weight: 700;
+    }
+    .brand strong, h1, h2, h3 {
+      font-family: "Baskerville", "Iowan Old Style", serif;
+      font-weight: 700;
+    }
+    .brand strong { font-size: 24px; }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .nav a, .hero-links a {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.65);
+    }
+    .hero {
+      border-radius: 32px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      margin-bottom: 18px;
+    }
+    .hero-copy {
+      padding: 30px;
+      background: linear-gradient(160deg, rgba(255,251,246,0.98) 0%, rgba(245,235,223,0.92) 100%);
+    }
+    .hero-side {
+      padding: 30px;
+      background:
+        radial-gradient(circle at top right, rgba(201,165,109,0.28), transparent 26%),
+        linear-gradient(150deg, #38534d 0%, #27453f 46%, #1d322e 100%);
+      color: #f7f1e7;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(38px, 6vw, 64px);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      line-height: 1.02;
+    }
+    p {
+      margin: 0;
+      line-height: 1.7;
+    }
+    .lede {
+      max-width: 42ch;
+      font-size: 18px;
+      color: #382f2a;
+    }
+    .hero-side p {
+      color: rgba(247,241,231,0.82);
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 18px;
+    }
+    .chip {
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .hero-links a.primary {
+      background: var(--wine);
+      border-color: transparent;
+      color: #fbf5ea;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .panel {
+      border-radius: 28px;
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,252,248,0.94), rgba(249,242,233,0.92));
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #352d28;
+      line-height: 1.7;
+    }
+    li + li {
+      margin-top: 8px;
+    }
+    .source-list a {
+      text-decoration: underline;
+      color: var(--pine);
+    }
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero, .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="bar">
+      <div class="brand">
+        <small>Peninsula Living</small>
+        <strong>Restaurant Dossier</strong>
+      </div>
+      <nav class="nav">
+        <a href="peninsula_living.html">Home</a>
+        <a href="peninsula_restaurants.html">Restaurants</a>
+        <a href="peninsula_hiking_trails.html">Hiking Trails</a>
+        <a href="peninsula_weekend_plans.html">Weekend Plans</a>
+      </nav>
+    </section>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">Peninsula Restaurant Model</span>
+        <h1>Pausa Bar &amp; Cookery</h1>
+        <p class="lede">这组里最像“现在进行时”的半岛强势 date-night 意餐；结论主要来自官网菜单密度、官方 Bib/Michelin 背书区和 Yelp 热门菜信号。</p>
+        <div class="chips">
+          <span class="chip">现代意大利菜</span>
+          <span class="chip">San Mateo</span>
+          <span class="chip">4.2/5（Yelp，1006条）</span>
+          <span class="chip">$$$</span>
+        </div>
+        <div class="hero-links">
+          <a class="primary" href="https://www.google.com/maps/search/?api=1&amp;query=Pausa%20Bar%20%26%20Cookery%2C%20223%20E%204th%20Ave%2C%20San%20Mateo%2C%20CA%2094401" target="_blank" rel="noopener noreferrer">Open Maps</a>
+          <a href="peninsula_restaurants.html">Back to Restaurants</a>
+        </div>
+      </div>
+      <div class="hero-side">
+        <span class="eyebrow">Source Note</span>
+        <h2>这家店更像什么</h2>
+        <p>官网 dinner PDF 给了当前菜路；评分与热门菜信号主要取自 Yelp；“最强 date-night 意餐”属于菜单和评论综合推断。</p>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="panel">
+        <span class="eyebrow">Best For</span>
+        <h2>适合什么局</h2>
+        <ul><li>有气氛的约会夜</li>
+<li>想吃更现代的意大利菜</li>
+<li>酒和菜一起发力</li></ul>
+        <div class="note">
+          <span class="eyebrow">Skip If</span>
+          <ul><li>只想吃非常传统老派意餐</li>
+<li>讨厌热闹和中等噪音</li>
+<li>严格控碳不想碰披萨/意面</li></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Ordering Bias</span>
+        <h2>怎么点更合理</h2>
+        <ul><li>先从 butcher’s board / chef’s board、focaccia、crudo 类开局，通常比重主食更显完成度</li>
+<li>主菜优先 sea bass、48-hour lamb shank 这类蛋白；意面只选一份 share</li>
+<li>若点披萨，优先 72-hour dough 上更有层次的口味，不必只点最基础 margherita</li></ul>
+        <div class="note">
+          <span class="eyebrow">Cautions</span>
+          <ul><li>菜单季节性很强，Yelp 热门菜未必常驻</li>
+<li>整体是热闹型房间，安静私密感不如更正式的 fine dining</li></ul>
+        </div>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Sources</span>
+        <h2>参考链接</h2>
+        <ul class="source-list"><li><a href="https://www.pausasanmateo.com/" target="_blank" rel="noopener noreferrer">www.pausasanmateo.com/</a></li>
+<li><a href="https://www.yelp.com/biz/pausa-bar-and-cookery-san-mateo" target="_blank" rel="noopener noreferrer">www.yelp.com/biz/pausa-bar-and-cookery-san-mateo</a></li>
+<li><a href="https://static1.squarespace.com/static/658c686c2b626f2aa9534d43/t/69fbaf8d4c9564729f12ff44/1778102157116/Pausa+Dinner+05-05-26.pdf" target="_blank" rel="noopener noreferrer">static1.squarespace.com/static/658c686c2b626f2aa9534d43/t/69fbaf8d4c9564729f12ff44/1778102157116/Pausa+Dinner+05-05-26.pdf</a></li></ul>
+      </article>
+
+      <article class="panel">
+        <span class="eyebrow">Editorial Read</span>
+        <h2>简短结论</h2>
+        <p>这组里最像“现在进行时”的半岛强势 date-night 意餐；结论主要来自官网菜单密度、官方 Bib/Michelin 背书区和 Yelp 热门菜信号。</p>
+        <p class="note">这里的 `best for / skip if / order bias` 是基于菜单、店型、公开 listing 与评价信号整理后的编辑判断，不等同于店方原始表述。</p>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
