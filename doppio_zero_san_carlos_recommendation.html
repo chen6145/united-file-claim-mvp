@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doppio Zero San Carlos 点菜推荐</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --paper: #fffaf3;
+      --ink: #1f1a17;
+      --muted: #6d6259;
+      --accent: #8f2f23;
+      --accent-2: #d9b16f;
+      --line: #e6d9cb;
+      --card: #fffdf9;
+      --shadow: 0 18px 50px rgba(64, 38, 19, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", "Times New Roman", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(217, 177, 111, 0.25), transparent 26%),
+        linear-gradient(180deg, #f8f2e8 0%, var(--bg) 100%);
+      line-height: 1.55;
+    }
+
+    .wrap {
+      width: min(1160px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 22px 0 56px;
+    }
+
+    .site-bar,
+    .site-footer {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .site-bar {
+      border-radius: 22px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .site-brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .site-brand span {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .site-brand strong {
+      font-size: 23px;
+      font-family: "Baskerville", "Iowan Old Style", serif;
+    }
+
+    .site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .site-nav a {
+      border: 1px solid rgba(143, 47, 35, 0.12);
+      border-radius: 999px;
+      padding: 10px 13px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.66);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.95fr;
+      gap: 22px;
+      align-items: stretch;
+      margin-bottom: 24px;
+    }
+
+    .hero-copy,
+    .hero-photo,
+    .panel,
+    .dish-card {
+      border: 1px solid rgba(143, 47, 35, 0.08);
+      background: rgba(255, 250, 243, 0.92);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 28px;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-photo {
+      border-radius: 28px;
+      overflow: hidden;
+      min-height: 320px;
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-weight: 700;
+      line-height: 1.08;
+    }
+
+    h1 {
+      font-size: clamp(34px, 5.5vw, 58px);
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(24px, 3vw, 34px);
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin: 0;
+    }
+
+    .lede {
+      font-size: 18px;
+      color: #332a25;
+      max-width: 44ch;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      border: 1px solid rgba(143, 47, 35, 0.14);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.62);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      border-radius: 24px;
+      padding: 24px;
+    }
+
+    .panel ul,
+    .dish-card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+
+    .panel li,
+    .dish-card li {
+      margin: 8px 0;
+    }
+
+    .section-title {
+      margin: 4px 0 14px;
+    }
+
+    .menu-plan {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .plan-card {
+      border-radius: 20px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(252,247,240,0.95) 100%);
+      border: 1px solid var(--line);
+    }
+
+    .plan-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dish-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .dish-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .dish-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .dish-body {
+      padding: 20px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      color: var(--accent);
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .label {
+      color: var(--accent);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 12px;
+      display: block;
+    }
+
+    .footer {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .grid-2,
+      .dish-grid,
+      .menu-plan {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        min-height: 240px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="site-bar">
+      <div class="site-brand">
+        <span>Peninsula Living</span>
+        <strong>Hotels</strong>
+      </div>
+      <nav class="site-nav">
+        <a href="peninsula_living.html">Home</a>
+        <a href="peninsula_hotels.html">Hotels</a>
+        <a href="peninsula_hiking_trails.html">Hiking Trails</a>
+        <a href="peninsula_weekend_plans.html">Weekend Plans</a>
+      </nav>
+    </section>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div>
+          <span class="eyebrow">Peninsula Living / San Carlos Group Dinner Guide</span>
+          <h1>Doppio Zero San Carlos<br>点菜推荐</h1>
+          <p class="lede">
+            这家更适合朋友和家人一起去吃一顿热闹、现代、偏南意路线的晚饭。它的强项不是超大份意面，而是
+            <strong>披萨面团、火腿与奶酪组合、以及多人共享的节奏</strong>。
+          </p>
+          <div class="chips">
+            <span class="chip">适合 6-8 人共享</span>
+            <span class="chip">主轴是 pizza，不是大盘 pasta</span>
+            <span class="chip">周末会偏吵，适合热闹局</span>
+            <span class="chip">6 人以上通常有 20% service charge</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <img src="https://static-content.owner.com/funnel/images/8608b6a6-7f7e-482c-8c8d-c3fd135c11c3?v=2704228040" alt="Doppio Zero San Carlos">
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <article class="panel">
+        <h2 class="section-title">这家店怎么点才对</h2>
+        <ul>
+          <li>这家是 <strong>Neapolitan / Southern Italian</strong> 路线，木炉披萨是核心战力。</li>
+          <li>多人桌最稳打法是：<strong>3-4 个前菜 + 4 张披萨 + 2 个 pasta + 2 个甜点</strong>。</li>
+          <li>不要把它当美式大盘意面馆。这里 <strong>份量中等</strong>，只点 pasta 容易吃得不满足。</li>
+          <li>如果桌上有保守口味的人，一张 <strong>Margherita</strong> 很有必要，能给整桌一个 baseline。</li>
+          <li>如果已经点了 <strong>Prosciutto e Burrata</strong>，后面不要再连续点太多 burrata-heavy 菜，不然会腻。</li>
+        </ul>
+      </article>
+      <article class="panel">
+        <h2 class="section-title">我给你的总判断</h2>
+        <ul>
+          <li><strong>适合带朋友来：</strong>氛围、热闹感、共享式点法都在线。</li>
+          <li><strong>最强部分：</strong>火腿 + burrata、红黄番茄披萨、木炉面团、海鲜墨鱼面。</li>
+          <li><strong>不该做的事：</strong>别把预算浪费在 generic 炸物或过重的奶油/松露类 ravioli 上。</li>
+          <li><strong>桌面平衡：</strong>一定要有 1-2 道清一点的菜，像 <strong>Beets</strong> 或 <strong>Broccolini</strong>。</li>
+          <li><strong>甜点策略：</strong><strong>Tiramisu + Panna Cotta</strong> 最稳，重口主菜之后也收得住。</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel" style="margin-bottom:24px;">
+      <h2 class="section-title">8 人标准单</h2>
+      <div class="menu-plan">
+        <div class="plan-card">
+          <strong>前菜</strong>
+          <p>Prosciutto e Burrata</p>
+          <p>Beets</p>
+          <p>Polpo alla Griglia</p>
+          <p>Broccolini</p>
+        </div>
+        <div class="plan-card">
+          <strong>披萨</strong>
+          <p>DoppioZero Pizza</p>
+          <p>Vesuvio Pizza</p>
+          <p>Porchetta Pizza</p>
+          <p>Margherita Pizza</p>
+        </div>
+        <div class="plan-card">
+          <strong>面 & 甜点</strong>
+          <p>Marechiaro</p>
+          <p>Fettuccine Short Ribs</p>
+          <p>Tiramisu</p>
+          <p>Panna Cotta</p>
+        </div>
+      </div>
+      <p>
+        如果桌上有人很爱 bacon / 咸香蔬菜，可以把 <strong>Broccolini</strong> 换成 <strong>Brussels Sprouts</strong>。
+        如果你们想更奶、更“拍照好看”，可以把 <strong>Margherita</strong> 换成 <strong>Bufalina</strong>，但整桌会更腻一点。
+      </p>
+    </section>
+
+    <section>
+      <h2 style="margin: 0 0 16px;">推荐菜细讲</h2>
+      <div class="dish-grid">
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/9a20f262-1f58-4c34-af25-55babb914927.jpeg" alt="Prosciutto e Burrata">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Prosciutto e Burrata</h3>
+              <span class="price">$22</span>
+            </div>
+            <p class="tagline">24 个月 Parma 火腿、burrata、E.V.O.O.。最直接体现这家“火腿 + 奶香”主轴。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Prosciutto di Parma：</strong>熟成咸鲜，脂香干净。</li>
+              <li><strong>Burrata：</strong>外层 mozzarella，里面更 creamier。</li>
+              <li><strong>E.V.O.O.：</strong>把奶香和火腿的香气连起来。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>这是整桌开场最稳的一道。</li>
+              <li>如果点了它，后面披萨别再全堆 burrata。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/97032c06-1f70-4164-9ccd-0daf272cecaa.jpeg" alt="Beets">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Beets</h3>
+              <span class="price">$16</span>
+            </div>
+            <p class="tagline">黄甜菜 + 红甜菜 + stracciatella + balsamic + toasted hazelnut。整桌最重要的平衡菜之一。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Stracciatella：</strong>比 burrata 更散、更轻一点的奶酪丝和奶油感。</li>
+              <li><strong>Hazelnut：</strong>补脆度和坚果香。</li>
+              <li><strong>Balsamic：</strong>拉出甜菜的甜和酸度。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>如果桌上肉和奶酪菜很多，这道很值。</li>
+              <li>它不是 filler，是控制整桌疲劳感的关键菜。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/6f17e668-a847-41d2-9c5a-0f0abc1a06c8.jpeg" alt="Polpo alla Griglia">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Polpo alla Griglia</h3>
+              <span class="price">$19</span>
+            </div>
+            <p class="tagline">地中海章鱼、土豆泥、芝麻菜、樱桃番茄 confit、anchovy dressing。更有“餐厅感”的前菜。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Mediterranean Octopus：</strong>炭烤香和弹性是这道的灵魂。</li>
+              <li><strong>Cherry tomato confit：</strong>低温慢煮后更甜更集中。</li>
+              <li><strong>Anchovy dressing：</strong>不是腥，是更深一点的鲜咸味。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>桌上有人怕腌鱼/海味的话提前提醒。</li>
+              <li>适合和 burrata 前菜一起点，风味不会撞。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/42c0637d-364b-4834-bdcb-1b3b2f8f6885.jpeg" alt="Broccolini">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Broccolini</h3>
+              <span class="price">$10</span>
+            </div>
+            <p class="tagline">橄榄油、蒜、Italian chilies。简单，但对多人桌很重要。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Broccolini：</strong>比普通西兰花更细更嫩。</li>
+              <li><strong>Garlic + olive oil：</strong>是标准意式配法，干净直接。</li>
+              <li><strong>Italian chilies：</strong>轻微刺激，不会抢戏。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>如果你们后面披萨偏重口，这道比 Brussels 更适合。</li>
+              <li>它的任务是“清桌面”，不是制造高潮。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/b839ef06-d224-4ba9-bec8-fb5bfacb8938.jpeg" alt="DoppioZero Pizza">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>DoppioZero Pizza</h3>
+              <span class="price">$25</span>
+            </div>
+            <p class="tagline">Burrata、24 个月 Parma 火腿、芝麻菜、刨 Parmigiano。这张最像“店名代表作”。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Burrata：</strong>提供润泽度和视觉中心。</li>
+              <li><strong>Prosciutto：</strong>负责主要咸鲜和熟成肉香。</li>
+              <li><strong>Arugula：</strong>轻苦感能把奶和火腿拉开。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>如果前面已经点了 Prosciutto e Burrata，这张依然能点，但桌面会有主题重复。</li>
+              <li>这是“想吃得开心”而不是“想研究复杂性”时最好用的一张。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/4d11aab0-881c-4265-a22a-c0d932a5f559.jpeg" alt="Vesuvio Pizza">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Vesuvio Pizza</h3>
+              <span class="price">$25</span>
+            </div>
+            <p class="tagline">Yellow tomato puree、fior di latte、capocollo、burrata、Parmigiano。更有变化感的一张。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Yellow tomato puree：</strong>酸度通常比红酱轻，更亮更柔。</li>
+              <li><strong>Capocollo：</strong>香料感更明显的腌制猪肉。</li>
+              <li><strong>Fior di latte：</strong>标准牛奶 mozzarella，口感更弹。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>如果你想吃 burrata，但不想和前菜完全重复，我更偏这张。</li>
+              <li>它比 DoppioZero Pizza 更有“第二张招牌”的感觉。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/280531b0-dcdd-4f6e-8c6e-59354a234d39.jpeg" alt="Porchetta Pizza">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Porchetta Pizza</h3>
+              <span class="price">$24</span>
+            </div>
+            <p class="tagline">Fresh mozzarella、garlic broccoli rabe、herb-roasted porchetta、Parmigiano。重心更偏肉香。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Porchetta：</strong>香草烤猪肉卷风格，油脂香更厚。</li>
+              <li><strong>Broccoli rabe：</strong>不是西兰花，是带一点苦韵的菜心感。</li>
+              <li><strong>Garlic：</strong>把整张饼推向更 savory 的方向。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>整桌如果已经奶酪偏多，这张很有必要。</li>
+              <li>有人怕苦味的话先打招呼，broccoli rabe 有个性。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/5c9de896-4c21-4264-ad87-0ea95aa12ae3.jpeg" alt="Margherita Pizza">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Margherita Pizza</h3>
+              <span class="price">$19</span>
+            </div>
+            <p class="tagline">San Marzano、fior di latte、Parmigiano、basil。校准一家披萨店基本功的标准答案。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>San Marzano tomato：</strong>甜酸平衡更经典。</li>
+              <li><strong>Fior di latte：</strong>干净、轻盈、不会把面团压住。</li>
+              <li><strong>Basil：</strong>最后把气味抬起来。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>多人桌一定要保留一张这种 baseline pizza。</li>
+              <li>有小朋友或口味保守的朋友时，这张价值更高。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/21921297-2113-4241-843d-aec28e446147.jpeg" alt="Marechiaro">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Marechiaro</h3>
+              <span class="price">$26</span>
+            </div>
+            <p class="tagline">自制墨鱼汁 tagliolini、大扇贝、蛤蜊、roasted garlic、轻辣番茄汁。菜单里最有辨识度的 pasta。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Squid ink tagliolini：</strong>颜色和海味记忆点都强。</li>
+              <li><strong>Jumbo scallops + clams：</strong>让这道不像普通番茄海鲜面。</li>
+              <li><strong>Light spicy tomato sauce：</strong>不是厚重海鲜酱，走轻亮路线。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>适合全桌分着尝，不是给最保守口味的人独享。</li>
+              <li>如果还想点第二道海鲜面，就会有点重复了。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/e7161c0a-2af3-46b3-b32c-8ebea2777ec5.jpeg" alt="Fettuccine Short Ribs">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Fettuccine Short Ribs</h3>
+              <span class="price">$25</span>
+            </div>
+            <p class="tagline">24 小时慢炖 short rib、Chianti 红酒 reduction、自制蛋面、刨 Parmigiano。最稳的肉酱型 pasta。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>24hr slow braised short rib：</strong>深、软、带红酒牛肉甜味。</li>
+              <li><strong>Homemade egg fettuccine：</strong>蛋香更足，能接住肉汁。</li>
+              <li><strong>Chianti reduction：</strong>让酱汁有更成熟的红酒底色。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>这道是“照顾大众口味”的保险单。</li>
+              <li>别再配太重的奶油/松露类面，不然会太厚。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/60a7a828-0073-4f33-8524-785f250fc7b2.jpeg" alt="Tiramisu">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Tiramisu</h3>
+              <span class="price">$10</span>
+            </div>
+            <p class="tagline">Ladyfingers、espresso、zabaglione cream、mascarpone、cocoa。最稳甜点，没有之一。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Espresso-soaked ladyfingers：</strong>咖啡香是主轴。</li>
+              <li><strong>Zabaglione + mascarpone：</strong>让口感既轻又有奶香厚度。</li>
+              <li><strong>Cocoa：</strong>最后压住甜度。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>这道几乎没有点错的时候。</li>
+              <li>多人桌通常至少一份起跳。</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="dish-card">
+          <img src="https://photos.tryotter.com/menu-photos/010b48ca-bc41-45e4-bad9-22ba4b8d6c78.jpeg" alt="Panna Cotta">
+          <div class="dish-body">
+            <div class="meta">
+              <h3>Panna Cotta</h3>
+              <span class="price">$10</span>
+            </div>
+            <p class="tagline">Vanilla cream custard + mixed berries sauce。比巧克力蛋糕更适合这桌的收尾。</p>
+            <span class="label">原材料亮点</span>
+            <ul>
+              <li><strong>Vanilla cream custard：</strong>滑、轻、不会过度压胃。</li>
+              <li><strong>Mixed berries sauce：</strong>用酸度收住前面的奶和肉。</li>
+            </ul>
+            <span class="label">Tips</span>
+            <ul>
+              <li>如果前面已经吃得很重，这道比再来个巧克力蛋糕合理。</li>
+              <li>最适合和 Tiramisu 一起搭成一甜一清的 ending。</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="footer">
+      <p><strong>来源说明：</strong>本页菜名、价格、官方描述和图片来自 Doppio Zero San Carlos 官方菜单页；关于“怎么点更稳”“哪些菜适合多人桌”“哪些组合容易腻”是基于菜单结构和你偏好的实战建议。</p>
+      <p style="margin-top:8px;">
+        官方参考：
+        <a href="https://doppiozerogroup.com/doppiozerosancarlos">店页</a> ·
+        <a href="https://doppiozerogroup.com/menu/doppiozerosancarlos?dialogState=orderDetails">菜单</a> ·
+        <a href="https://www.opentable.com/r/doppio-zero-san-carlos">OpenTable</a>
+      </p>
+    </section>
+
+    <section class="site-footer" style="margin-top:18px; border-radius:22px; padding:18px 20px;">
+      <div style="font-family:'Baskerville','Iowan Old Style',serif; font-size:24px; margin-bottom:6px;">Peninsula Living</div>
+      <p style="color:var(--muted); font-size:14px; line-height:1.6;">
+        This page now lives inside the Hotels section. Return to the index if you want the broader Peninsula Living structure rather than a single dinner dossier.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

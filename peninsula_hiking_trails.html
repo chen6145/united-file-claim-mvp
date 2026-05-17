@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peninsula Living | Hiking Trails</title>
+  <style>
+    :root {
+      --bg: #ece5d8;
+      --paper: rgba(251, 247, 240, 0.92);
+      --ink: #1d1916;
+      --muted: #6c635b;
+      --pine: #2a463f;
+      --line: rgba(29, 25, 22, 0.1);
+      --shadow: 0 24px 58px rgba(45, 33, 21, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Avenir Next", "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(42, 70, 63, 0.12), transparent 26%),
+        linear-gradient(180deg, #f4eee4 0%, var(--bg) 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+    .shell { width: min(1120px, calc(100vw - 28px)); margin: 0 auto; padding: 20px 0 48px; }
+    .bar, .hero, .card {
+      background: var(--paper);
+      border: 1px solid rgba(255,255,255,0.7);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+    .bar {
+      border-radius: 20px;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .brand { font-family: "Baskerville", "Iowan Old Style", serif; font-size: 23px; }
+    .nav { display: flex; flex-wrap: wrap; gap: 10px; }
+    .nav a {
+      padding: 10px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.62);
+      border: 1px solid var(--line);
+    }
+    .hero {
+      border-radius: 30px;
+      padding: 28px;
+      margin-bottom: 18px;
+      background: linear-gradient(180deg, rgba(251, 247, 240, 0.88), rgba(240, 233, 223, 0.96));
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pine);
+      font-weight: 700;
+    }
+    h1, h2 {
+      margin: 0;
+      font-family: "Baskerville", "Iowan Old Style", serif;
+      line-height: 1.04;
+    }
+    h1 { font-size: clamp(38px, 6vw, 64px); margin-bottom: 12px; }
+    p { margin: 0; color: #352d28; line-height: 1.66; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .card { border-radius: 26px; padding: 24px; min-height: 250px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .chip {
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,0.68);
+      border: 1px solid var(--line);
+    }
+    ul { margin: 12px 0 0; padding-left: 18px; color: var(--muted); line-height: 1.66; }
+    .coming {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(42, 70, 63, 0.06);
+      border: 1px solid rgba(42, 70, 63, 0.1);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="bar">
+      <div class="brand">Peninsula Living</div>
+      <nav class="nav">
+        <a href="peninsula_living.html">Home</a>
+        <a href="peninsula_hotels.html">Hotels</a>
+        <a href="peninsula_weekend_plans.html">Weekend Plans</a>
+      </nav>
+    </section>
+
+    <section class="hero">
+      <span class="eyebrow">Hiking Trails</span>
+      <h1>Hiking Trails</h1>
+      <p>这个栏目先不急着堆数量。目标不是做 Bay Area trail encyclopedia，而是逐步收出一组真正好用的 Peninsula 傍晚路线：带狗能去、和晚饭衔接自然、以及有一点新鲜感但不太 obvious。</p>
+      <div class="chips">
+        <span class="chip">dog-friendly first</span>
+        <span class="chip">late-afternoon usable</span>
+        <span class="chip">less obvious than famous defaults</span>
+        <span class="chip">weather and wind matter</span>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <span class="eyebrow">Curation Principles</span>
+        <h2 style="font-size:34px; margin-bottom:10px;">怎么挑</h2>
+        <ul>
+          <li>优先考虑真实使用概率，不做纸面上“很厉害”但不太会去的路线。</li>
+          <li>如果是 dog 场景，狗友好不是加分项，而是硬要求。</li>
+          <li>不默认推 obvious famous spots，除非当周的景况和时间窗真的最合适。</li>
+          <li>风、雾、暴晒、停车和晚饭前衔接感，都会直接影响推荐排序。</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <span class="eyebrow">Current State</span>
+        <h2 style="font-size:34px; margin-bottom:10px;">下一步会放什么</h2>
+        <p>这里接下来适合放成卡片化条目：例如更稳的傍晚 ridge walk、海边但不太赌天气的路线、以及适合“出门一小段再去吃饭”的短而值路径。</p>
+        <div class="coming">当前先保留成策展页骨架。等你要继续扩这个站时，我可以把 Peninsula / Mid-Peninsula 的 trail shortlist 直接按使用场景补进来。</div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
